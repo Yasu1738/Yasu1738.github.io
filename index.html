@@ -1,10 +1,67 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>景況調査アンケート回答率 インフォグラフィック (メッセージ更新版)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
-    ...
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>景況調査インフォグラフィック</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+      padding: 2rem;
+    }
+    .chart-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">西尾張支部 回答率比較グラフ</h1>
+  <div class="chart-container">
+    <canvas id="responseRateChart"></canvas>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('responseRateChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['2024年5月期', '2025年2月期', '2025年5月期'],
+        datasets: [{
+          label: '回答率 (%)',
+          data: [23.5, 25.6, 28.4],
+          backgroundColor: ['#60a5fa', '#818cf8', '#34d399']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: '全体回答率の推移'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            },
+            title: {
+              display: true,
+              text: '回答率'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
 </html>
