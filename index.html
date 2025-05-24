@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>景況調査インフォグラフィック</title>
+  <title>景況調査アンケート インフォグラフィック</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -14,15 +14,54 @@
     }
     .chart-container {
       width: 100%;
-      max-width: 600px;
+      max-width: 700px;
       margin: 2rem auto;
+    }
+    .section {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #ffffff;
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #1f2937;
+    }
+    h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+    }
+    p {
+      color: #374151;
+      line-height: 1.6;
+      margin-top: 0.75rem;
     }
   </style>
 </head>
 <body>
-  <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">西尾張支部 回答率比較グラフ</h1>
+
+  <div class="section">
+    <h1>西尾張支部 回答率比較インフォグラフィック</h1>
+    <p>このインフォグラフィックは、2024年5月期・2025年2月期・2025年5月期の3期間にわたる西尾張支部の景況調査アンケート回答率を視覚的に比較・分析したものです。</p>
+  </div>
+
   <div class="chart-container">
     <canvas id="responseRateChart"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>分析コメント</h2>
+    <p><strong>📈 回答率は着実に上昇傾向：</strong> 2024年5月期の23.5%から、2025年2月期には25.6%、2025年5月期には28.4%と、3期連続での上昇が確認されました。</p>
+    <p><strong>🎯 改善のポイント：</strong> 声かけの強化、アンケートの目的共有が一定の効果を上げていると推測されます。組織間のばらつき要因は今後の個別分析で検討が必要です。</p>
+    <p><strong>📝 次のステップ：</strong> 回答率が特に向上した支部にヒアリングを行い、好事例の横展開を進めることで、さらなる改善が期待できます。</p>
   </div>
 
   <script>
@@ -63,5 +102,6 @@
       }
     });
   </script>
+
 </body>
 </html>
