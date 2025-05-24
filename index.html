@@ -1,107 +1,662 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>景況調査アンケート インフォグラフィック</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f3f4f6;
-      padding: 2rem;
-    }
-    .chart-container {
-      width: 100%;
-      max-width: 700px;
-      margin: 2rem auto;
-    }
-    .section {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: #ffffff;
-      padding: 1.5rem 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    h1, h2 {
-      text-align: center;
-      color: #1f2937;
-    }
-    h1 {
-      font-size: 1.875rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-top: 1.5rem;
-    }
-    p {
-      color: #374151;
-      line-height: 1.6;
-      margin-top: 0.75rem;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="section">
-    <h1>西尾張支部 回答率比較インフォグラフィック</h1>
-    <p>このインフォグラフィックは、2024年5月期・2025年2月期・2025年5月期の3期間にわたる西尾張支部の景況調査アンケート回答率を視覚的に比較・分析したものです。</p>
-  </div>
-
-  <div class="chart-container">
-    <canvas id="responseRateChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>分析コメント</h2>
-    <p><strong>📈 回答率は着実に上昇傾向：</strong> 2024年5月期の23.5%から、2025年2月期には25.6%、2025年5月期には28.4%と、3期連続での上昇が確認されました。</p>
-    <p><strong>🎯 改善のポイント：</strong> 声かけの強化、アンケートの目的共有が一定の効果を上げていると推測されます。組織間のばらつき要因は今後の個別分析で検討が必要です。</p>
-    <p><strong>📝 次のステップ：</strong> 回答率が特に向上した支部にヒアリングを行い、好事例の横展開を進めることで、さらなる改善が期待できます。</p>
-  </div>
-
-  <script>
-    const ctx = document.getElementById('responseRateChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['2024年5月期', '2025年2月期', '2025年5月期'],
-        datasets: [{
-          label: '回答率 (%)',
-          data: [23.5, 25.6, 28.4],
-          backgroundColor: ['#60a5fa', '#818cf8', '#34d399']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: '全体回答率の推移'
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function(value) {
-                return value + '%';
-              }
-            },
-            title: {
-              display: true,
-              text: '回答率'
-            }
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景況調査アンケート回答率 インフォグラフィック (メッセージ更新版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7; 
         }
-      }
-    });
-  </script>
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out; 
+            border-top: 1px solid #e2e8f0; 
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 2500px; 
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5); 
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 24px; 
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 750px; 
+            border-radius: 8px;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 12px; 
+            right: 20px;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent; 
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid currentColor;
+            display: inline-block;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid currentColor;
+            display: inline-block;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        .accordion-button.open .arrow-down {
+            transform: rotate(180deg);
+        }
+        .accordion-button.open .arrow-up {
+            transform: rotate(180deg);
+        }
+        .rate-bar-container {
+            background-color: #e9ecef;
+            border-radius: 0.25rem;
+            height: 22px; 
+            width: 100%;
+            overflow: hidden;
+        }
+        .rate-bar {
+            height: 100%;
+            transition: width 0.5s ease-in-out;
+            text-align: right;
+            padding-right: 6px;
+            color: white;
+            font-size: 0.85rem; 
+            line-height: 22px;
+            white-space: nowrap;
+        }
+        .section-title {
+            font-size: 1.25rem; 
+            font-weight: 600;
+            color: #1f2937; 
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb; 
+        }
+        .subsection-title {
+            font-size: 1.125rem; 
+            font-weight: 600;
+            color: #374151; 
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .list-disc {
+            padding-left: 1.5rem;
+        }
+        .list-disc li {
+            margin-bottom: 0.5rem;
+        }
+        .highlight-green {
+            color: #059669; 
+            font-weight: 600;
+        }
+        .highlight-red {
+            color: #dc2626; 
+            font-weight: 600;
+        }
+        .highlight-yellow {
+            color: #f59e0b; 
+            font-weight: 600;
+        }
+        .emoji-bullet {
+            margin-right: 0.5rem;
+        }
+        .note-text {
+            font-size: 0.875rem; 
+            color: #4b5563; 
+            margin-top: 0.25rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid #d1d5db; 
+        }
+        .catchphrase-text { /* 新しいキャッチコピー用のスタイル */
+            font-size: 1.75rem; 
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0 1rem;
+            color: #b91c1c; /* 少し暗めの赤 */
+        }
+        .explanation-text p, .explanation-text ul {
+            margin-bottom: 1rem;
+            color: #374151; /* gray-700 */
+        }
+        .explanation-text h4 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #111827; /* gray-900 */
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .explanation-text ul {
+            list-style-type: disc;
+            padding-left: 2rem;
+        }
+        .explanation-text li {
+            margin-bottom: 0.75rem;
+        }
+        .chart-container {
+            position: relative;
+            height:500px; 
+            width:100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+    <div class="container mx-auto max-w-5xl bg-white shadow-xl rounded-lg p-6 md:p-8">
+        <header class="mb-10 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">景況調査アンケート 回答状況 3期比較分析</h1>
+            <p class="text-gray-600 mt-2">西尾張支部: 2025年5月期・2025年2月期・2024年5月期</p>
+        </header>
 
+        <section id="overallComparison" class="mb-10 p-6 bg-slate-50 rounded-lg shadow-md">
+            <h2 class="section-title">西尾張支部 全体的な回答状況</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                <div>
+                    <h3 class="text-lg font-medium text-sky-700">2025年5月期</h3>
+                    <p class="text-gray-600">総数: <span id="overallMay25Total"></span>名</p>
+                    <p class="text-gray-600">回答数: <span id="overallMay25Responded"></span>名</p>
+                    <p class="text-2xl font-bold text-sky-600">回答率: <span id="overallMay25Rate"></span>%</p>
+                    <div class="rate-bar-container mt-2">
+                        <div id="overallMay25RateBar" class="rate-bar bg-sky-500"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-indigo-700">2025年2月期</h3>
+                    <p class="text-gray-600">総数: <span id="overallFeb25Total"></span>名</p>
+                    <p class="text-gray-600">回答数: <span id="overallFeb25Responded"></span>名</p>
+                    <p class="text-2xl font-bold text-indigo-600">回答率: <span id="overallFeb25Rate"></span>%</p>
+                    <div class="rate-bar-container mt-2">
+                        <div id="overallFeb25RateBar" class="rate-bar bg-indigo-500"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-emerald-700">2024年5月期</h3>
+                    <p class="text-gray-600">総数: <span id="overallMay24Total"></span>名</p>
+                    <p class="text-gray-600">回答数: <span id="overallMay24Responded"></span>名</p>
+                    <p class="text-2xl font-bold text-emerald-600">回答率: <span id="overallMay24Rate"></span>%</p>
+                    <div class="rate-bar-container mt-2">
+                        <div id="overallMay24RateBar" class="rate-bar bg-emerald-500"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-6 text-center text-base text-gray-700 font-semibold"> 
+                2025年5月期 西尾張支部回答率は、2025年2月期比で<strong id="changeFromFeb" class="text-red-700"></strong>、
+                2024年5月期比で<strong id="changeFromPrevYear" class="text-red-700"></strong>。
+            </p>
+        </section>
+
+        <section id="branchComparison" class="mb-10 p-6 bg-slate-50 rounded-lg shadow-md">
+            <h2 class="section-title">西尾張支部 組織別 詳細比較</h2>
+            <div id="branchCardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-4">
+                </div>
+        </section>
+
+        <div class="space-y-6">
+            <section id="rateTrendGraphSection">
+                <button class="accordion-button w-full text-left text-xl font-semibold text-gray-700 p-4 bg-slate-200 hover:bg-slate-300 rounded-lg focus:outline-none transition-colors duration-300 flex justify-between items-center">
+                    組織別 回答率推移グラフ
+                    <span class="arrow-down"></span>
+                </button>
+                <div class="accordion-content bg-white p-5 rounded-b-lg shadow-inner">
+                    <div class="chart-container">
+                        <canvas id="responseRateChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trendAnalysis">
+                <button class="accordion-button w-full text-left text-xl font-semibold text-gray-700 p-4 bg-slate-200 hover:bg-slate-300 rounded-lg focus:outline-none transition-colors duration-300 flex justify-between items-center">
+                    組織別 回答状況の推移と傾向分析
+                    <span class="arrow-down"></span>
+                </button>
+                <div class="accordion-content bg-white p-5 rounded-b-lg shadow-inner">
+                    <p class="mb-4 text-gray-600">提供された分析レポートに基づき、西尾張支部傘下の組織を回答率の推移によって3つのカテゴリーに分類し、詳細な傾向を分析します。<br><span class="note-text"><strong>注:</strong> 以下の分類および要因分析はデータに基づく仮説であり、実際の要因については各組織へのヒアリング等による確認が必要です。</span></p>
+                    
+                    <h3 class="subsection-title"><span class="emoji-bullet">📈</span>大幅改善（行動喚起成功の可能性）</h3>
+                    <p class="text-gray-600 mb-3">このカテゴリーには、<strong class="highlight-green">一宮西、尾張北青同、尾張西青同</strong>が含まれます。これらの組織は、特に2025年2月期から2025年5月期にかけて回答数を大きく伸ばしており、「声かけ・巻き込みの成功事例」として活用できる可能性が考えられます。（要確認）</p>
+                    <ul class="list-disc text-gray-600 space-y-2">
+                        <li><strong>一宮西:</strong> 2024年5月期9.4% → 2025年2月期18.8% (+9.4pt) → 2025年5月期36.0% (<span class="highlight-green">+17.2pt</span>)。会員数微増の中、回答数が倍増し顕著な改善。成功要因の特定と横展開を推奨。</li>
+                        <li><strong>尾張西青同:</strong> 2024年5月期(回答数2件) → 2025年2月期7.0% → 2025年5月期19.4% (<span class="highlight-green">+12.4pt</span>)。会員数減少の中で回答数が増加。「強い動機づけがあった可能性」の調査・活用が有効。</li>
+                        <li><strong>尾張北青同:</strong> 2024年5月期(回答率 約61.0% ※補完値) → 2025年2月期11.1% → 2025年5月期40.6% (<span class="highlight-green">+29.5pt</span>)。2月期から大幅改善。</li>
+                    </ul>
+
+                    <h3 class="subsection-title"><span class="emoji-bullet">⚠️</span>継続低迷（重点的なテコ入れが必要）</h3>
+                    <p class="text-gray-600 mb-3">このカテゴリーには、<strong class="highlight-red">海部・津島、一宮</strong>が含まれます。これらの組織は、回答率が継続して低迷、あるいは悪化傾向にあり、重点的な対策が必要です。</p>
+                    <ul class="list-disc text-gray-600 space-y-2">
+                        <li><strong>海部・津島:</strong> 2024年5月期17.3% → 2025年2月期11.4% (-5.9pt) → 2025年5月期11.2% (-0.2pt)。会員数増加にも関わらず回答数・回答率が低迷。キーパーソンによる個別声かけ体制の構築や目標設定による動機づけを推奨。</li>
+                        <li><strong>一宮:</strong> 2024年5月期25.2% → 2025年2月期20.0% (-5.2pt) → 2025年5月期11.4% (<span class="highlight-red">-8.6pt</span>)。会員数安定の中で回答数・回答率が継続的に大きく下落。同様に重点的なテコ入れが必要。</li>
+                    </ul>
+
+                    <h3 class="subsection-title"><span class="emoji-bullet">🟨</span>ゆるやか改善/現状維持（さらなる支援が有効）</h3>
+                    <p class="text-gray-600 mb-3">このカテゴリーには、<strong class="highlight-yellow">稲沢、西春日井</strong>が含まれます。これらの組織は、回答率が持ち直し傾向、または微増傾向、あるいは高水準から低下後に安定の兆しを見せており、さらなる支援によって回答率向上が期待できます。</p>
+                    <ul class="list-disc text-gray-600 space-y-2">
+                        <li><strong>稲沢:</strong> 2024年5月期9.8% → 2025年2月期16.8% (+7.0pt) → 2025年5月期18.8% (<span class="highlight-yellow">+2.0pt</span>)。地道に向上傾向。会員数増加の中で回答数も順調増。達成目前型の声かけが有効の可能性。</li>
+                        <li><strong>西春日井:</strong> 2024年5月期47.6% → 2025年2月期20.0% (-27.6pt) → 2025年5月期17.6% (-2.4pt)。24年5月期は高水準だったが大幅低下後、直近の減少幅は小さい。回復に向けた追加支援や達成目標型の働きかけが有効の可能性。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="recommendedActions">
+                <button class="accordion-button w-full text-left text-xl font-semibold text-gray-700 p-4 bg-slate-200 hover:bg-slate-300 rounded-lg focus:outline-none transition-colors duration-300 flex justify-between items-center">
+                    推奨アクション
+                    <span class="arrow-down"></span>
+                </button>
+                <div class="accordion-content bg-white p-5 rounded-b-lg shadow-inner">
+                     <ul class="list-none space-y-4 text-gray-700">
+                        <li>
+                            <strong class="text-lg block mb-1"><span class="emoji-bullet">📈</span>大幅改善組織 (一宮西、尾張北青同、尾張西青同)</strong>
+                            <p>成功要因の可視化（なぜ回答率が大幅に向上したのか具体的な分析）。成功事例を他支部へ横展開するための施策検討。<span class="note-text">（要因は仮説であり要確認）</span></p>
+                        </li>
+                        <li>
+                            <strong class="text-lg block mb-1"><span class="emoji-bullet">⚠️</span>継続低迷組織 (一宮、海部・津島)</strong>
+                            <p>キーパーソンによる個別声かけ体制の構築、未回答者への直接的アプローチ強化。具体的な目標設定による動機づけ、組織全体での回答率向上意識の醸成。</p>
+                        </li>
+                        <li>
+                            <strong class="text-lg block mb-1"><span class="emoji-bullet">🟨</span>ゆるやか改善/現状維持組織 (稲沢、西春日井)</strong>
+                            <p>達成目前型のアナウンスの積極的な実施（例：「現在の回答率は〇〇%。あと〇件で目標の〇〇%！」など）。具体的な数値目標達成を促し、最後のプッシュを図る。</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="messageForAction">
+                <button class="accordion-button w-full text-left text-xl font-semibold text-gray-700 p-4 bg-slate-200 hover:bg-slate-300 rounded-lg focus:outline-none transition-colors duration-300 flex justify-between items-center">
+                    “何も変わらない”は、答えない人がつくる。
+                    <span class="arrow-down"></span>
+                </button>
+                <div class="accordion-content bg-white p-5 rounded-b-lg shadow-inner explanation-text">
+                    <p class="text-lg italic text-center text-gray-600 mb-6">「ただのアンケートでしょ？」</p>
+                    <p class="mb-4">…いえ、それ、大きな勘違いかもしれません。<br>
+                    景況調査アンケートは、単なる意見収集ではなく、あなたの会社、業界、地域が“どう支援されるか”を考えるための重要な情報源になります。<br>
+                    つまり、「声を上げる」か「沈黙する」かで、地域や業界の未来に関わる選択肢が変わる可能性があるのです。</p>
+
+                    <h4>📊 景況調査アンケートとは？</h4>
+                    <p>景況調査アンケートとは、会員企業の経営状況や景気動向、業界・地域での課題を把握するための調査です。</p>
+                    <p>愛知中小企業家同友会ではこれを、<strong>単なるデータ収集ではなく、「会員の生の声を行政や社会に伝える大切な手段」</strong>として位置づけています。</p>
+                    
+                    <h4>🎯 同友会における意味と役割</h4>
+                    <ul>
+                        <li><strong>政策提言の資料となる</strong><br>
+                        　→ アンケートの集計結果は、補助金、税制、融資などの制度設計や改善に向けた行政との意見交換や提言活動の基礎資料となり得ます。</li>
+                        <li><strong>地域経済の実情を可視化する</strong><br>
+                        　→ 回答を通じて、業種や地域ごとの現状・課題が明らかになり、同友会や行政が的確な支援策を検討する材料となります。</li>
+                        <li><strong>会員相互の問題意識の共有</strong><br>
+                        　→ 共通の悩みや変化を知ることで、安心感や連帯が生まれ、「自社だけではない」と共感することで前向きな学びや行動につながります。</li>
+                        <li><strong>「経営環境改善運動」の一環</strong><br>
+                        　→ 同友会が進める「経営環境をよくする」運動の起点として、会員の声を集め、社会に働きかけていく第一歩となります。</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="branchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modalBranchName" class="text-xl font-semibold mb-4"></h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-3 bg-sky-50 rounded-md">
+                    <h4 class="font-medium text-sky-700">2025年5月期</h4>
+                    <p id="modalMay25Members" class="text-sm"></p>
+                    <p id="modalMay25Responded" class="text-sm"></p>
+                    <p id="modalMay25Rate" class="font-bold text-lg"></p>
+                </div>
+                <div class="p-3 bg-indigo-50 rounded-md">
+                    <h4 class="font-medium text-indigo-700">2025年2月期</h4>
+                    <p id="modalFeb25Members" class="text-sm"></p>
+                    <p id="modalFeb25Responded" class="text-sm"></p>
+                    <p id="modalFeb25Rate" class="font-bold text-lg"></p>
+                </div>
+                <div class="p-3 bg-emerald-50 rounded-md">
+                    <h4 class="font-medium text-emerald-700">2024年5月期</h4>
+                    <p id="modalMay24Members" class="text-sm"></p>
+                    <p id="modalMay24Responded" class="text-sm"></p>
+                    <p id="modalMay24Rate" class="font-bold text-lg"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const surveyData = {
+        overall: { 
+            may2025: { total: 549, responded: 113, rate: (113 / 549) * 100 }, 
+            feb2025: { total: 535, responded: 87, rate: (87 / 535) * 100 },   
+            may2024: { total: 489, responded: 115, rate: (115 / 489) * 100 }  
+        },
+        branches: [ 
+            { name: "海部・津島",支部:"西尾張支部", 
+              may2025: { members: 98, responded: 11, rate: 11.2 }, 
+              feb2025: { members: 88, responded: 10, rate: 11.4 }, 
+              may2024: { members: 81, responded: 14, rate: 17.3 } 
+            },
+            { name: "一宮",支部:"西尾張支部", 
+              may2025: { members: 105, responded: 12, rate: 11.4 }, 
+              feb2025: { members: 105, responded: 21, rate: 20.0 }, 
+              may2024: { members: 107, responded: 27, rate: 25.2 } 
+            },
+            { name: "一宮西",支部:"西尾張支部", 
+              may2025: { members: 114, responded: 41, rate: 36.0 }, 
+              feb2025: { members: 112, responded: 21, rate: 18.8 }, 
+              may2024: { members: 85, responded: 8, rate: 9.4 } 
+            },
+            { name: "稲沢",支部:"西尾張支部", 
+              may2025: { members: 96, responded: 18, rate: 18.8 }, 
+              feb2025: { members: 95, responded: 16, rate: 16.8 }, 
+              may2024: { members: 61, responded: 6, rate: 9.8 } 
+            },
+            { name: "西春日井",支部:"西尾張支部", 
+              may2025: { members: 68, responded: 12, rate: 17.6 }, 
+              feb2025: { members: 65, responded: 13, rate: 20.0 }, 
+              may2024: { members: 21, responded: 10, rate: 47.6 } 
+            },
+            { name: "尾張北青同",支部:"西尾張支部", 
+              may2025: { members: 32, responded: 13, rate: 40.6 }, 
+              feb2025: { members: 27, responded: 3, rate: 11.1 }, 
+              may2024: { members: 21, responded: 10, rate: 61.0 } 
+            },
+            { name: "尾張西青同",支部:"西尾張支部", 
+              may2025: { members: 36, responded: 7, rate: 19.4 }, 
+              feb2025: { members: 43, responded: 3, rate: 7.0 }, 
+              may2024: { members: 33, responded: 2, rate: 6.1 } 
+            }
+        ]
+    };
+
+    surveyData.branches.forEach(branch => {
+        branch.changeFeb = branch.may2025.rate - branch.feb2025.rate;
+        if (branch.may2024 && typeof branch.may2024.rate === 'number') { 
+             branch.changePrevYear = branch.may2025.rate - branch.may2024.rate;
+        } else {
+            branch.changePrevYear = null; 
+        }
+    });
+
+    document.getElementById('overallMay25Total').textContent = surveyData.overall.may2025.total;
+    document.getElementById('overallMay25Responded').textContent = surveyData.overall.may2025.responded;
+    document.getElementById('overallMay25Rate').textContent = surveyData.overall.may2025.rate.toFixed(1);
+    const overallMay25RateBar = document.getElementById('overallMay25RateBar');
+    overallMay25RateBar.style.width = surveyData.overall.may2025.rate + '%';
+    overallMay25RateBar.textContent = surveyData.overall.may2025.rate.toFixed(1) + '%';
+
+    document.getElementById('overallFeb25Total').textContent = surveyData.overall.feb2025.total;
+    document.getElementById('overallFeb25Responded').textContent = surveyData.overall.feb2025.responded;
+    document.getElementById('overallFeb25Rate').textContent = surveyData.overall.feb2025.rate.toFixed(1);
+    const overallFeb25RateBar = document.getElementById('overallFeb25RateBar');
+    overallFeb25RateBar.style.width = surveyData.overall.feb2025.rate + '%';
+    overallFeb25RateBar.textContent = surveyData.overall.feb2025.rate.toFixed(1) + '%';
+
+    document.getElementById('overallMay24Total').textContent = surveyData.overall.may2024.total;
+    document.getElementById('overallMay24Responded').textContent = surveyData.overall.may2024.responded;
+    document.getElementById('overallMay24Rate').textContent = surveyData.overall.may2024.rate.toFixed(1);
+    const overallMay24RateBar = document.getElementById('overallMay24RateBar');
+    overallMay24RateBar.style.width = surveyData.overall.may2024.rate + '%';
+    overallMay24RateBar.textContent = surveyData.overall.may2024.rate.toFixed(1) + '%';
+    
+    const changeFromFebValue = surveyData.overall.may2025.rate - surveyData.overall.feb2025.rate;
+    const changeFromPrevYearValue = surveyData.overall.may2025.rate - surveyData.overall.may2024.rate;
+
+    const changeFromFebEl = document.getElementById('changeFromFeb');
+    changeFromFebEl.textContent = `${changeFromFebValue.toFixed(1)}ポイント${changeFromFebValue >= 0 ? '増加' : '低下'}`;
+    changeFromFebEl.className = changeFromFebValue >= 0 ? 'text-green-700 font-bold' : 'text-red-700 font-bold';
+    
+    const changeFromPrevYearEl = document.getElementById('changeFromPrevYear');
+    changeFromPrevYearEl.textContent = `${changeFromPrevYearValue.toFixed(1)}ポイント${changeFromPrevYearValue >= 0 ? '増加' : '低下'}`;
+    changeFromPrevYearEl.className = changeFromPrevYearValue >= 0 ? 'text-green-700 font-bold' : 'text-red-700 font-bold';
+
+    const branchCardsContainer = document.getElementById('branchCardsContainer');
+    const modal = document.getElementById('branchModal');
+
+    surveyData.branches.forEach(branch => {
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer flex flex-col justify-between';
+        
+        function getChangeHtml(changeValue, periodText) {
+            if (changeValue === null || typeof changeValue === 'undefined') {
+                return `<p class="text-xs text-gray-500">${periodText}: データなし</p>`;
+            }
+            let changeTextClass = 'text-gray-700';
+            let changePrefix = '';
+            let arrowIconHTML = '<span class="inline-block ml-1 text-gray-500">-</span>';
+            if (changeValue > 0.001) { 
+                changeTextClass = 'text-green-600 font-semibold';
+                changePrefix = '+';
+                arrowIconHTML = '<span class="inline-block ml-1 text-green-500 text-lg">▲</span>';
+            } else if (changeValue < -0.001) { 
+                changeTextClass = 'text-red-600 font-semibold';
+                arrowIconHTML = '<span class="inline-block ml-1 text-red-500 text-lg">▼</span>';
+            }
+            return `<p class="text-xs ${changeTextClass}">${periodText}: 
+                        <span class="text-sm">${changePrefix}${changeValue.toFixed(1)}pt</span> 
+                        ${arrowIconHTML}
+                    </p>`;
+        }
+        
+        let prevYearRateText = "データなし";
+        if (branch.may2024 && typeof branch.may2024.rate === 'number') {
+            prevYearRateText = `${branch.may2024.rate.toFixed(1)}%`;
+        }
+
+        card.innerHTML = `
+            <div>
+                <h3 class="text-md font-bold text-gray-800 mb-1">${branch.name}</h3>
+                <p class="text-xs text-gray-500 mb-2">${branch.支部}</p>
+                <p class="text-gray-700 text-sm">2025年5月期: <span class="font-extrabold text-xl text-sky-600">${branch.may2025.rate.toFixed(1)}%</span></p>
+                <p class="text-xs text-gray-500"> (2025年2月期: ${branch.feb2025.rate.toFixed(1)}% | 2024年5月期: ${prevYearRateText})</p>
+            </div>
+            <div class="mt-2 pt-2 border-t border-gray-200 space-y-1">
+                ${getChangeHtml(branch.changeFeb, '25年2月期比')}
+                ${getChangeHtml(branch.changePrevYear, '24年5月期比')}
+            </div>
+        `;
+        card.addEventListener('click', () => openModal(branch));
+        branchCardsContainer.appendChild(card);
+    });
+
+    function openModal(branchData) {
+        document.getElementById('modalBranchName').textContent = `${branchData.name} (${branchData.支部})`;
+        
+        document.getElementById('modalMay25Members').textContent = `会員数: ${branchData.may2025.members}名`;
+        document.getElementById('modalMay25Responded').textContent = `回答数: ${branchData.may2025.responded}名`;
+        document.getElementById('modalMay25Rate').textContent = `回答率: ${branchData.may2025.rate.toFixed(1)}%`;
+        
+        document.getElementById('modalFeb25Members').textContent = `会員数: ${branchData.feb2025.members}名`;
+        document.getElementById('modalFeb25Responded').textContent = `回答数: ${branchData.feb2025.responded}名`;
+        document.getElementById('modalFeb25Rate').textContent = `回答率: ${branchData.feb2025.rate.toFixed(1)}%`;
+
+        if (branchData.may2024 && typeof branchData.may2024.members === 'number') { 
+            document.getElementById('modalMay24Members').textContent = `会員数: ${branchData.may2024.members}名`;
+            document.getElementById('modalMay24Responded').textContent = `回答数: ${branchData.may2024.responded}名`;
+            document.getElementById('modalMay24Rate').textContent = `回答率: ${branchData.may2024.rate.toFixed(1)}%`;
+        } else { 
+            document.getElementById('modalMay24Members').textContent = `会員数: データなし`;
+            document.getElementById('modalMay24Responded').textContent = `回答数: データなし`;
+            document.getElementById('modalMay24Rate').textContent = `回答率: データなし`;
+        }
+        
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.nextElementSibling;
+            button.classList.toggle('open');
+            
+            if (button.classList.contains('open')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                 if (button.parentElement.id === 'rateTrendGraphSection' && !button.dataset.chartInitialized) {
+                    initResponseRateChart();
+                    button.dataset.chartInitialized = 'true'; 
+                }
+            } else {
+                content.style.maxHeight = "0";
+            }
+        });
+    });
+
+    function initResponseRateChart() {
+        const ctx = document.getElementById('responseRateChart').getContext('2d');
+        const labels = ['2024年5月期', '2025年2月期', '2025年5月期'];
+        const datasets = [];
+
+        datasets.push({
+            label: '西尾張支部全体',
+            data: [
+                surveyData.overall.may2024.rate,
+                surveyData.overall.feb2025.rate,
+                surveyData.overall.may2025.rate
+            ],
+            borderColor: 'rgba(0, 0, 0, 1)', 
+            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            fill: false,
+            tension: 0.1,
+            borderWidth: 2 
+        });
+        
+        const branchColors = [
+            'rgba(255, 99, 132, 1)',  
+            'rgba(54, 162, 235, 1)', 
+            'rgba(255, 206, 86, 1)', 
+            'rgba(75, 192, 192, 1)', 
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)', 
+            'rgba(128, 128, 128, 1)'  
+        ];
+
+        surveyData.branches.forEach((branch, index) => {
+            datasets.push({
+                label: branch.name,
+                data: [
+                    (branch.may2024 && typeof branch.may2024.rate === 'number') ? branch.may2024.rate : null,
+                    branch.feb2025.rate,
+                    branch.may2025.rate
+                ],
+                borderColor: branchColors[index % branchColors.length],
+                backgroundColor: branchColors[index % branchColors.length].replace('1)', '0.1)'),
+                fill: false,
+                tension: 0.1,
+                borderWidth: 1.5
+            });
+        });
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '西尾張支部 組織別 回答率推移',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y.toFixed(1) + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '回答率 (%)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value.toFixed(0) + '%'; 
+                            }
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '調査期間'
+                        }
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>
