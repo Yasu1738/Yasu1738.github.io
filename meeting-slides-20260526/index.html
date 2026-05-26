@@ -989,6 +989,7 @@
     <script>
         let currentSlideIndex = 1;
         const totalSlides = 10;
+        const publicShareUrl = 'https://yasu1738.github.io/meeting-slides-20260526/';
 
         function copyTemplateText() {
             const template = document.getElementById('templateText').innerText;
@@ -1004,7 +1005,7 @@
             }
         }
 
-        function fallbackCopy(text) {
+        function fallbackCopy(text, successMessage = "コピーしました！", failureMessage = "コピーに失敗しました。直接選択してください。") {
             const textArea = document.createElement("textarea");
             textArea.value = text;
             textArea.style.position = "fixed";
@@ -1014,9 +1015,9 @@
             try {
                 const successful = document.execCommand('copy');
                 if (successful) {
-                    showToast("テンプレートをコピーしました！");
+                    showToast(successMessage);
                 } else {
-                    showToast("コピーに失敗しました。直接選択してください。");
+                    showToast(failureMessage);
                 }
             } catch (err) {
                 showToast("コピーエラーが発生しました。");
@@ -1034,25 +1035,28 @@
         }
 
         function shareCurrentPage() {
+            const shareUrl = window.location.protocol === 'file:' ? publicShareUrl : window.location.href;
             const shareData = {
                 title: document.title,
                 text: '第1回 異業種交流会×企画ミーティング',
-                url: window.location.href
+                url: shareUrl
             };
 
             if (navigator.share && window.location.protocol !== 'file:') {
-                navigator.share(shareData).catch(() => {});
+                navigator.share(shareData).catch(() => {
+                    fallbackCopy(shareUrl, "公開URLをコピーしました！");
+                });
                 return;
             }
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    showToast("ページURLをコピーしました！");
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    showToast("公開URLをコピーしました！");
                 }).catch(() => {
-                    fallbackCopy(window.location.href);
+                    fallbackCopy(shareUrl, "公開URLをコピーしました！");
                 });
             } else {
-                fallbackCopy(window.location.href);
+                fallbackCopy(shareUrl, "公開URLをコピーしました！");
             }
         }
 
