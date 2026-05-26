@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>第1回 異業種交流会×企画ミーティング - スマホ最適化スライド</title>
+    <meta name="description" content="第1回 異業種交流会×企画ミーティング用のスマホ最適化スライドです。">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="第1回 異業種交流会×企画ミーティング">
+    <meta property="og:description" content="スマホでも見やすい企画ミーティング用スライド。">
+    <meta name="twitter:card" content="summary">
+    <!-- Google Fonts & Font Awesome インポート -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0F172A;
+            --primary-light: #1E293B;
+            --bg-light: #F8FAFC;
+            --line-green: #06C755;
+            --accent: #FFB703;
+            --accent-red: #EF4444;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #020617;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .presentation-stage {
+            width: 100%;
+            max-width: 1280px;
+            height: 720px;
+            aspect-ratio: 16/9;
+            position: relative;
+            background: #FFFFFF;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px 80px 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #FFFFFF;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+        }
+
+        .slide.dark {
+            background-color: var(--primary);
+            color: #FFFFFF;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .slide.dark .slide-header {
+            border-bottom-color: var(--primary-light);
+        }
+        .category-tag {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .category-tag.line-tag {
+            color: var(--line-green);
+        }
+        .slide-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 0;
+            line-height: 1.25;
+            border-left: 10px solid var(--primary);
+            padding-left: 15px;
+        }
+        .slide.dark .slide-title {
+            color: #FFFFFF;
+            border-left-color: var(--accent);
+        }
+        .slide-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-family: 'Poppins', sans-serif;
+            text-align: right;
+        }
+
+        .slide-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+        }
+
+        .text-bold { font-weight: 700; }
+
+        .list-style {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .list-style li {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .list-style i {
+            color: var(--primary);
+            margin-right: 12px;
+            margin-top: 6px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .stat-container {
+            text-align: center;
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 90px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin: 10px 0;
+        }
+        .stat-unit {
+            font-size: 24px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            background: var(--bg-light);
+            border-left: 10px solid var(--text-muted);
+            border-radius: 8px;
+            padding: 14px 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+        .timeline-item.active-green {
+            border-left-color: var(--line-green);
+            background: #F0FDF4;
+        }
+        .timeline-item.active-amber {
+            border-left-color: var(--accent);
+            background: #FFFBEB;
+        }
+        .timeline-time {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            width: 200px;
+        }
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 700;
+            flex-grow: 1;
+        }
+        .timeline-badge {
+            background: var(--accent-red);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .line-qr-box {
+            background: #FFFFFF;
+            border: 3px solid var(--line-green);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 380px;
+            box-shadow: 0 20px 25px -5px rgba(6, 199, 85, 0.1);
+        }
+        .qr-image-wrapper {
+            width: 180px;
+            height: 180px;
+            background: #F8FAFC;
+            border: 2px dashed #CBD5E1;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .qr-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .copy-card {
+            background: #F8FAFC;
+            border: 2px dashed #CBD5E1;
+            border-radius: 12px;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .copy-card:hover, .copy-card:active {
+            border-color: var(--line-green);
+            background: #F0FDF4;
+        }
+        .copy-card::after {
+            content: 'タップしてコピー';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: var(--line-green);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .copy-template {
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--primary-light);
+            white-space: pre-wrap;
+            margin: 0;
+        }
+
+        .line-direct-btn {
+            background: var(--line-green);
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            transition: opacity 0.2s;
+        }
+        .line-direct-btn:active {
+            opacity: 0.8;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        .slide.dark .slide-footer {
+            border-top-color: var(--primary-light);
+            color: var(--text-muted);
+        }
+
+        .nav-bar {
+            width: 100%;
+            max-width: 1280px;
+            background: #0F172A;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            z-index: 50;
+        }
+        .nav-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-btn {
+            background: #1E293B;
+            border: 1px solid #334155;
+            color: #FFFFFF;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+        .nav-btn.icon-btn {
+            justify-content: center;
+            width: 46px;
+            padding: 10px;
+        }
+        .nav-btn:hover {
+            background: #334155;
+        }
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .nav-progress {
+            color: #94A3B8;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .matrix-table th {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            font-weight: 700;
+            padding: 12px 18px;
+            font-size: 16px;
+            text-align: left;
+        }
+        .matrix-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+            line-height: 1.5;
+            background-color: #FFFFFF;
+        }
+        .matrix-table tr:nth-child(even) td {
+            background-color: var(--bg-light);
+        }
+
+        .tiled-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        .tile-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .tile-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .tile-card h3 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+        .tile-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        .roadmap-card {
+            background: #FFFFFF;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            position: relative;
+        }
+        .roadmap-card.active-navy {
+            border-color: var(--primary);
+        }
+        .roadmap-card.active-green {
+            border-color: var(--line-green);
+            background: #F0FDF4;
+        }
+        .roadmap-badge {
+            display: inline-block;
+            background: var(--text-muted);
+            color: #FFFFFF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .roadmap-card.active-navy .roadmap-badge {
+            background: var(--primary);
+        }
+        .roadmap-card.active-green .roadmap-badge {
+            background: var(--line-green);
+        }
+        .roadmap-card h3 {
+            font-size: 20px;
+            margin: 0 0 8px 0;
+            color: var(--primary);
+        }
+        .roadmap-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-color: #0F172A;
+                padding: 0;
+                justify-content: flex-start;
+            }
+
+            .presentation-stage {
+                height: calc(100vh - 60px);
+                aspect-ratio: auto;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .slide {
+                padding: 20px 15px 75px 15px;
+                overflow-y: auto;
+                justify-content: flex-start;
+                gap: 15px;
+            }
+
+            .slide-header {
+                margin-bottom: 10px;
+                padding-bottom: 8px;
+            }
+            .slide-title {
+                font-size: 20px;
+                border-left-width: 6px;
+                padding-left: 10px;
+                line-height: 1.3;
+            }
+            .category-tag {
+                font-size: 11px;
+            }
+            .slide-meta {
+                display: none;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .grid-3, .tiled-grid, .roadmap-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .stat-value {
+                font-size: 56px;
+            }
+            .stat-container {
+                padding: 15px;
+            }
+            .list-style li {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            .list-style i {
+                font-size: 14px;
+                margin-top: 4px;
+            }
+
+            .timeline {
+                gap: 8px;
+            }
+            .timeline-item {
+                padding: 10px 15px;
+            }
+            .timeline-time {
+                font-size: 14px;
+                width: 110px;
+            }
+            .timeline-title {
+                font-size: 13px;
+            }
+            .timeline-badge {
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+
+            .line-qr-box {
+                height: auto;
+                padding: 15px;
+            }
+            .qr-image-wrapper {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 10px;
+            }
+            .copy-template {
+                font-size: 12px;
+            }
+            .line-direct-btn {
+                font-size: 15px;
+                padding: 10px;
+            }
+
+            .matrix-table th {
+                font-size: 13px;
+                padding: 8px;
+            }
+            .matrix-table td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+
+            .tile-card, .roadmap-card {
+                padding: 12px;
+            }
+            .tile-card h3, .roadmap-card h3 {
+                font-size: 14px;
+            }
+            .tile-card p, .roadmap-card p {
+                font-size: 11px;
+            }
+
+            .slide-footer {
+                margin-top: auto;
+                font-size: 11px;
+                padding-top: 10px;
+            }
+
+            .nav-bar {
+                padding: 10px 15px;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+            }
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .nav-btn.icon-btn {
+                width: 40px;
+                padding: 8px;
+            }
+            .nav-group {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-stage" id="stage">
+
+        <div class="slide dark active" id="slide-1">
+            <div class="slide-header">
+                <div class="header-left">
+                    <div class="category-tag">第1回 異業種交流会 × 企画ミーティング</div>
+                </div>
+            </div>
+            <div class="slide-content" style="justify-content: center; align-items: flex-start;">
+                <h1 style="font-size: 52px; font-weight: 900; margin: 0 0 15px 0; line-height: 1.25;">
+                    7月「大相談会」に向けた<br>プロデュース作戦会議
+                </h1>
+                <p class="subtitle" style="font-size: 24px; margin-bottom: 40px; font-weight: 500;">
+                    〜 地域ビジネスの種を全員で育てる3ステップ 〜
+                </p>
+                <div style="font-size: 14px; color: #94A3B8; border-top: 1px solid var(--primary-light); padding-top: 20px; width: 350px;">
+                    <p style="margin: 0 0 5px 0;">主催：経営革新ワーキンググループ</p>
+                    <p style="margin: 0;">2026年6月1日 開催</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>01</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <div class="header-left">
+                    <div class="category-tag">PART 1: 現状分析</div>
+                    <h2 class="slide-title">申込者データ：高い期待度と明確なテーマ関心</h2>
+                </div>
+                <div class="slide-meta">DATA SUMMARY</div>
+            </div>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div class="stat-container">
+                        <p style="font-size: 18px; font-weight: 700; color: var(--text-muted); margin: 0;">本交流会への期待度平均</p>
+                        <div class="stat-value">5.63<span class="stat-unit">/7</span></div>
+                        <p style="font-size: 15px; font-weight: 700; color: var(--accent-red); margin: 0;">★最高評価「7」が12名(40%)で最多！</p>
+                    </div>
+                    <div>
+                        <ul class="list-style">
+                            <li><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> <span class="text-bold">経営者・意思決定層が73.3%（22名）</span></li>
+                            <li><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> 「新規事業・コラボ」への関心が全体の8割以上</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> 個人事業主と組織（20人以上）が絶妙に融合</li>
+                        </ul>
+                        <p style="font-size: 16px; line-height: 1.5; color: var(--text-muted); margin-top: 15px;">
+                            これだけポテンシャルの高いメンバーだからこそ、<br>
+                            <span class="text-bold" style="color: var(--primary);">自己紹介セッションで時間を使うのはもったいない！</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>02</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <div class="header-left">
+                    <div class="category-tag line-tag">PART 2: プログラム</div>
+                    <h2 class="slide-title">タイムスケジュール：自己紹介は15分で「デジタルログ化」</h2>
+                </div>
+                <div class="slide-meta">TIMELINE</div>
+            </div>
+            <div class="slide-content">
+                <div class="timeline">
+                    <div class="timeline-item active-green">
+                        <div class="timeline-time" style="color:var(--line-green);"><i class="fa-brands fa-line"></i> 13:00 - 13:15 (15m)</div>
+                        <div class="timeline-title" style="color:var(--line-green); font-weight:800;">① 趣旨説明 ＆ 自己紹介（LINEグループ参加・投稿）</div>
+                        <div class="timeline-badge" style="background:var(--line-green);">15分で完了！</div>
+                    </div>
+                    <div class="timeline-item active-amber">
+                        <div class="timeline-time" style="color:#B58500;">13:15 - 14:10 (55m)</div>
+                        <div class="timeline-title" style="color:#B58500; font-weight:800;">② 【グループ内】「企画の種」ブレインストーミング</div>
+                        <div class="timeline-badge" style="background:var(--accent); color:var(--primary);">たっぷり55分間！</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:10 - 14:30 (20m)</div>
+                        <div class="timeline-title">③ 全体共有・発表 ＆ 7月WGへの誘導</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:30 - 15:00 (30m)</div>
+                        <div class="timeline-title">④ 名刺交換会 ＆ 自由交流会</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>03</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-4" style="border: 4px solid var(--line-green);">
+            <div class="slide-header" style="border-bottom-color: rgba(6, 199, 85, 0.2);">
+                <div class="header-left">
+                    <div class="category-tag line-tag"><i class="fa-brands fa-line"></i> SMART ONBOARDING</div>
+                    <h2 class="slide-title" style="border-left-color: var(--line-green);">LINEグループに一斉参加しましょう！</h2>
+                </div>
+                <div class="slide-meta" style="color: var(--line-green);">LINE INTEGRATION</div>
+            </div>
+            <div class="slide-content">
+                <div class="grid-2">
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <p class="text-bold" style="font-size: 16px; line-height: 1.4; margin: 0;">
+                            下記をタップしてコピーし、LINEグループに参加したらそのままペーストして送信してください！
+                        </p>
+                        <div class="copy-card" onclick="copyTemplateText()">
+                            <pre class="copy-template" id="templateText">【お名前】[お名前を入力]
+【強み】[自社の技術、個人デザイン、融資相談など]
+【お困りごと】[地域連携サービスをやりたいが右腕がいない、など]
+【出会いたい人】[〇〇な異業種、専門知識のある支援機関]</pre>
+                        </div>
+                        <p style="font-size: 12px; color: var(--accent-red); margin-top: 5px; font-weight: bold;">
+                            ※LINEを利用されない方には「手書き用自己紹介シート」をご用意しております。お気軽にお声がけください。
+                        </p>
+                    </div>
+                    <div class="line-qr-box">
+                        <div class="qr-image-wrapper">
+                            <img id="lineQrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fline.me%2Fti%2Fg%2FwM7VyzLZc5" alt="LINEグループQRコード">
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: center;">
+                            ※PC・プロジェクター閲覧中の方は、上記QRをスマホカメラでスキャンしてください。
+                        </p>
+                        <a href="https://line.me/ti/g/wM7VyzLZc5" target="_blank" class="line-direct-btn" id="lineDirectBtn">
+                            <i class="fa-brands fa-line"></i> スマホ：直接LINEで開く
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>04</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <div class="header-left">
+                    <div class="category-tag">PART 2: プログラム</div>
+                    <h2 class="slide-title">LINEグループ活用がもたらす「3大メリット」</h2>
+                </div>
+                <div class="slide-meta">ADVANTAGES</div>
+            </div>
+            <div class="slide-content">
+                <div class="tiled-grid">
+                    <div class="tile-card" style="border-top: 4px solid var(--line-green);">
+                        <i class="fa-solid fa-clock-rotate-left" style="color:var(--line-green);"></i>
+                        <h3>ブレスト時間を極大化</h3>
+                        <p>口頭での自己紹介30分を、スマホ活用によりわずか15分に短縮。55分間のブレストが可能に！</p>
+                    </div>
+                    <div class="tile-card" style="border-top: 4px solid var(--primary);">
+                        <i class="fa-solid fa-database"></i>
+                        <h3>自己紹介のログ化</h3>
+                        <p>全員の強みや困りごとがLINEグループに文章として残るため、会が終わった後でもいつでも見返せます。</p>
+                    </div>
+                    <div class="tile-card" style="border-top: 4px solid var(--accent);">
+                        <i class="fa-solid fa-bullseye" style="color:var(--accent);"></i>
+                        <h3>後半の交流をシャープに</h3>
+                        <p>後半の自由交流（30分）で、LINEの自己紹介ログを頼りに、会いたい人・お困りごとのマッチ候補へ直行できます。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>05</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <div class="header-left">
+                    <div class="category-tag">PART 2: プログラム</div>
+                    <h2 class="slide-title">心理的安全性を生む「3つの約束（グランドルール）」</h2>
+                </div>
+                <div class="slide-meta">GRAND RULES</div>
+            </div>
+            <div class="slide-content">
+                <div class="tiled-grid">
+                    <div class="tile-card" style="background: #FFFBEB; border-color: var(--accent);">
+                        <i class="fa-solid fa-users-viewfinder" style="color:var(--accent);"></i>
+                        <h3>立場に関わらずフラット</h3>
+                        <p>経営者、一社員、個人事業主。全員が未来の地域大相談会を仕掛ける「共同プロデューサー」です。</p>
+                    </div>
+                    <div class="tile-card" style="background: #F0FDF4; border-color: var(--line-green);">
+                        <i class="fa-solid fa-gem" style="color:var(--line-green);"></i>
+                        <h3>「お困りごと」こそ宝物</h3>
+                        <p>自慢話は不要。「これがなくて困っている」というリアルな弱みを見せることが、次のビジネスの種になります。</p>
+                    </div>
+                    <div class="tile-card" style="background: #FEF2F2; border-color: var(--accent-red);">
+                        <i class="fa-solid fa-comments" style="color:var(--accent-red);"></i>
+                        <h3>否定禁止、Yes, And</h3>
+                        <p>「でも無理では」は禁止。「それ面白いね！だったら、さらに〇〇を掛け合わせてみたら？」と乗っかりましょう。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>06</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <div class="slide-header">
+                <div class="header-left">
+                    <div class="category-tag">PART 3: 7月へのロードマップ</div>
+                    <h2 class="slide-title">ロードマップ：6月の種まきから、7月の大相談会での実装へ</h2>
+                </div>
+                <div class="slide-meta">ROADMAP</div>
+            </div>
+            <div class="slide-content">
+                <div class="roadmap-grid">
+                    <div class="roadmap-card active-navy">
+                        <div class="roadmap-badge">1. 本日（6/1）</div>
+                        <h3>異業種交流会</h3>
+                        <p>・お困りごとのハントと可視化<br>・強みを掛け算したブース・セミナーアイデアのブレスト<br>・LINEグループ結成</p>
+                    </div>
+                    <div class="roadmap-card active-navy" style="box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08);">
+                        <div class="roadmap-badge">2. 7月上旬</div>
+                        <h3>ワーキンググループ</h3>
+                        <p style="font-weight:bold; color:var(--primary); margin-bottom: 4px; font-size:11px;">※ここの設計は各グループで調整して当日の準備をすすめてください</p>
+                        <p>・本日出たアイデアのブラッシュアップと特設ブースへの落とし込み<br>・大相談会での役割分担<br>・お試し実験の計画と準備</p>
+                    </div>
+                    <div class="roadmap-card active-green">
+                        <div class="roadmap-badge">3. 7月後半・本番</div>
+                        <h3>お困りごと大相談会</h3>
+                        <p>・自分たちが共同プロデュースした特設ブース・相談ブースの公開展開<br>・リアルなお困りごとの解決<br>・協業・マッチング契約の成立</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>07</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <div class="slide-header">
+                <div class="header-left">
+                    <div class="category-tag">PART 3: 7月へのロードマップ</div>
+                    <h2 class="slide-title">自己紹介シート（お困りごとの収集目的）</h2>
+                </div>
+                <div class="slide-meta">WORKSHEET PURPOSE</div>
+            </div>
+            <div class="slide-content">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">お聞きした項目</th>
+                            <th>大相談会に向けた、運営プロデュース側の活用目的</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-bold">① 自社の紹介・強み</td>
+                            <td>大相談会ブースでの解決策パッケージ（リソース）としてストック</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="color: var(--accent-red);">② リアルなお困りごと</td>
+                            <td>大相談会当日のリアルな来場者ニーズを代弁する「キラーコンテンツブース」に設計</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">③ 今日出会いたい人</td>
+                            <td>本日後半の30分のフリートークマッチングを効率化させる目印に</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="slide-footer">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>08</span>
+            </div>
+        </div>
+
+        <div class="slide dark" id="slide-9" style="justify-content: center; align-items: center; text-align: center;">
+            <i class="fa-solid fa-quote-left" style="font-size: 48px; color: var(--accent); margin-bottom: 20px;"></i>
+            <blockquote style="margin: 0; padding: 0; border: none; font-size: 28px; font-weight: 700; line-height: 1.6; max-width: 850px;">
+                私たちが抱える「お困りごと」こそが、<br>
+                7月の大相談会を最も活性化させるコアコンテンツになる。
+            </blockquote>
+            <p style="color: #94A3B8; font-size: 16px; margin-top: 25px; font-weight: 400;">
+                ただの参加者ではなく、仕掛けるプロデューサーとして、地域に共創の種をまきましょう。
+            </p>
+            <div class="slide-footer" style="width: 100%; padding-top: 15px;">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>09</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-10" style="justify-content: center; align-items: center; text-align: center; background-color: var(--bg-light);">
+            <h1 style="font-size: 56px; font-weight: 800; color: var(--primary); margin: 0 0 15px 0; letter-spacing: -0.02em;">
+                Thank You!
+            </h1>
+            <div style="width: 50px; height: 3px; background: var(--accent); margin-bottom: 20px;"></div>
+            <p style="font-size: 18px; margin: 0 0 35px 0; font-weight: 500; color: var(--primary-light);">
+                7月のワーキンググループ（WG）、そしてお困りごと大相談会でお会いしましょう！
+            </p>
+
+            <div class="slide-footer" style="width: 100%; padding-top: 20px;">
+                <span>第1回 異業種交流会×企画ミーティング</span>
+                <span>10</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="nav-bar">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()" disabled><i class="fa-solid fa-chevron-left"></i> 前へ</button>
+        <div class="nav-progress" id="progressText">1 / 10</div>
+        <div class="nav-group">
+            <button class="nav-btn icon-btn" id="shareBtn" onclick="shareCurrentPage()" aria-label="共有" title="共有"><i class="fa-solid fa-share-nodes"></i></button>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">次へ <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check" style="color:var(--line-green);"></i>
+        <span id="toastMessage">コピーしました！</span>
+    </div>
+
+    <script>
+        let currentSlideIndex = 1;
+        const totalSlides = 10;
+
+        function copyTemplateText() {
+            const template = document.getElementById('templateText').innerText;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(template).then(() => {
+                    showToast("テンプレートをコピーしました！");
+                }).catch(() => {
+                    fallbackCopy(template);
+                });
+            } else {
+                fallbackCopy(template);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast("テンプレートをコピーしました！");
+                } else {
+                    showToast("コピーに失敗しました。直接選択してください。");
+                }
+            } catch (err) {
+                showToast("コピーエラーが発生しました。");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function shareCurrentPage() {
+            const shareData = {
+                title: document.title,
+                text: '第1回 異業種交流会×企画ミーティング',
+                url: window.location.href
+            };
+
+            if (navigator.share && window.location.protocol !== 'file:') {
+                navigator.share(shareData).catch(() => {});
+                return;
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast("ページURLをコピーしました！");
+                }).catch(() => {
+                    fallbackCopy(window.location.href);
+                });
+            } else {
+                fallbackCopy(window.location.href);
+            }
+        }
+
+        function showSlide(index) {
+            if (index < 1 || index > totalSlides) return;
+            for (let i = 1; i <= totalSlides; i++) {
+                document.getElementById(`slide-${i}`).classList.remove('active');
+            }
+            document.getElementById(`slide-${index}`).classList.add('active');
+            currentSlideIndex = index;
+            document.getElementById('prevBtn').disabled = (index === 1);
+            document.getElementById('nextBtn').disabled = (index === totalSlides);
+            document.getElementById('progressText').innerText = `${index} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides) {
+                showSlide(currentSlideIndex + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 1) {
+                showSlide(currentSlideIndex - 1);
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === 'Space') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const stage = document.getElementById('stage');
+
+        stage.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        }, false);
+
+        stage.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const threshold = 50;
+            if (touchStartX - touchEndX > threshold) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > threshold) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>
