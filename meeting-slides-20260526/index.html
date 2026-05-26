@@ -348,6 +348,68 @@
             transform: translateY(0);
         }
 
+        .share-panel {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.62);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1200;
+        }
+        .share-panel.show {
+            display: flex;
+        }
+        .share-panel-inner {
+            width: min(560px, 100%);
+            background: #FFFFFF;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
+            position: relative;
+        }
+        .share-panel h3 {
+            margin: 0 0 8px 0;
+            color: var(--primary);
+            font-size: 22px;
+        }
+        .share-panel p {
+            margin: 0 0 14px 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .share-url-input {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 15px;
+            color: var(--primary);
+            background: var(--bg-light);
+        }
+        .share-panel-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .share-panel-actions .nav-btn {
+            justify-content: center;
+            flex: 1;
+        }
+        .share-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: 0;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
         .slide-footer {
             border-top: 1px solid var(--border);
             padding-top: 10px;
@@ -843,6 +905,16 @@
             .nav-group {
                 gap: 8px;
             }
+            .share-panel {
+                padding: 12px;
+            }
+            .share-panel-inner {
+                padding: 18px;
+                border-radius: 10px;
+            }
+            .share-panel-actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -1197,6 +1269,19 @@
         <span id="toastMessage">コピーしました！</span>
     </div>
 
+    <div class="share-panel" id="sharePanel" aria-hidden="true">
+        <div class="share-panel-inner">
+            <button class="share-close-btn" onclick="hideSharePanel()" aria-label="閉じる"><i class="fa-solid fa-xmark"></i></button>
+            <h3>共有用URL</h3>
+            <p>コピーできない場合は、このURLを選択してLINEやメールで送ってください。</p>
+            <input class="share-url-input" id="shareUrlInput" type="text" readonly value="https://yasu1738.github.io/meeting-slides-20260526/">
+            <div class="share-panel-actions">
+                <button class="nav-btn" onclick="copyShareUrlFromPanel()"><i class="fa-solid fa-copy"></i> URLをコピー</button>
+                <a class="nav-btn" href="https://yasu1738.github.io/meeting-slides-20260526/" target="_blank" style="text-decoration: none;"><i class="fa-solid fa-up-right-from-square"></i> 開く</a>
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentSlideIndex = 1;
         const totalSlides = 10;
@@ -1223,8 +1308,9 @@
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
+            let successful = false;
             try {
-                const successful = document.execCommand('copy');
+                successful = document.execCommand('copy');
                 if (successful) {
                     showToast(successMessage);
                 } else {
@@ -1234,6 +1320,7 @@
                 showToast("コピーエラーが発生しました。");
             }
             document.body.removeChild(textArea);
+            return successful;
         }
 
         function showToast(message) {
@@ -1245,8 +1332,46 @@
             }, 2500);
         }
 
+        function getShareUrl() {
+            return window.location.protocol === 'file:' ? publicShareUrl : window.location.href;
+        }
+
+        function showSharePanel(url) {
+            const panel = document.getElementById('sharePanel');
+            const input = document.getElementById('shareUrlInput');
+            input.value = url;
+            panel.classList.add('show');
+            panel.setAttribute('aria-hidden', 'false');
+            input.focus();
+            input.select();
+        }
+
+        function hideSharePanel() {
+            const panel = document.getElementById('sharePanel');
+            panel.classList.remove('show');
+            panel.setAttribute('aria-hidden', 'true');
+        }
+
+        function copyShareUrl(shareUrl) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    showToast("公開URLをコピーしました！");
+                }).catch(() => {
+                    if (!fallbackCopy(shareUrl, "公開URLをコピーしました！")) {
+                        showSharePanel(shareUrl);
+                    }
+                });
+            } else if (!fallbackCopy(shareUrl, "公開URLをコピーしました！")) {
+                showSharePanel(shareUrl);
+            }
+        }
+
+        function copyShareUrlFromPanel() {
+            copyShareUrl(document.getElementById('shareUrlInput').value);
+        }
+
         function shareCurrentPage() {
-            const shareUrl = window.location.protocol === 'file:' ? publicShareUrl : window.location.href;
+            const shareUrl = getShareUrl();
             const shareData = {
                 title: document.title,
                 text: '第1回 異業種交流会×企画ミーティング',
@@ -1254,21 +1379,15 @@
             };
 
             if (navigator.share && window.location.protocol !== 'file:') {
-                navigator.share(shareData).catch(() => {
-                    fallbackCopy(shareUrl, "公開URLをコピーしました！");
+                navigator.share(shareData).catch((error) => {
+                    if (!error || error.name !== 'AbortError') {
+                        copyShareUrl(shareUrl);
+                    }
                 });
                 return;
             }
 
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(shareUrl).then(() => {
-                    showToast("公開URLをコピーしました！");
-                }).catch(() => {
-                    fallbackCopy(shareUrl, "公開URLをコピーしました！");
-                });
-            } else {
-                fallbackCopy(shareUrl, "公開URLをコピーしました！");
-            }
+            copyShareUrl(shareUrl);
         }
 
         function showSlide(index) {
