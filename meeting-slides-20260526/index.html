@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>第1回 異業種交流会×企画ミーティング - スマホ最適化スライド</title>
-    <meta name="description" content="第1回 異業種交流会×企画ミーティング用のスマホ最適化スライドです。">
+    <title>地域の中小企業で、何ができるかを見つける90分</title>
+    <meta name="description" content="6/1 異業種交流会×企画ミーティングの事前共有スライドです。困りごと・強み・連携の種を見つける場です。">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="第1回 異業種交流会×企画ミーティング">
-    <meta property="og:description" content="スマホでも見やすい企画ミーティング用スライド。">
+    <meta property="og:title" content="地域の中小企業で、何ができるかを見つける90分">
+    <meta property="og:description" content="6/1 異業種交流会×企画ミーティング。困りごと・強み・連携の種を見つける場です。">
     <meta name="twitter:card" content="summary">
     <!-- Google Fonts & Font Awesome インポート -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -413,6 +413,131 @@
             font-weight: 700;
         }
 
+        .hero-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin: 0 0 16px 0;
+            line-height: 1.25;
+        }
+        .hero-subtitle {
+            font-size: 22px;
+            line-height: 1.6;
+            margin: 0 0 34px 0;
+            font-weight: 700;
+            color: #CBD5E1;
+        }
+        .message-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .message-card.accent {
+            background: #FFFBEB;
+            border-color: #FDE68A;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            width: 100%;
+        }
+        .metric-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 16px;
+            text-align: center;
+        }
+        .metric-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .metric-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        .theme-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+        .theme-row {
+            display: grid;
+            grid-template-columns: 1fr 90px;
+            gap: 16px;
+            align-items: center;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+        .theme-row strong {
+            font-size: 20px;
+            color: var(--primary);
+        }
+        .theme-count {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--line-green);
+            text-align: right;
+        }
+        .goal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            width: 100%;
+        }
+        .goal-card {
+            background: #FFFFFF;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 18px;
+            text-align: center;
+        }
+        .goal-card i {
+            font-size: 34px;
+            color: var(--line-green);
+            margin-bottom: 14px;
+        }
+        .goal-card h3 {
+            margin: 0;
+            font-size: 22px;
+            line-height: 1.45;
+            color: var(--primary);
+        }
+        .question-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 14px;
+        }
+        .question-list li {
+            background: var(--bg-light);
+            border-left: 8px solid var(--line-green);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.45;
+        }
+        .soft-note {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
         .matrix-table {
             width: 100%;
             border-collapse: collapse;
@@ -570,6 +695,66 @@
             .stat-container {
                 padding: 15px;
             }
+            .hero-title {
+                font-size: 30px;
+                line-height: 1.35;
+            }
+            .hero-subtitle {
+                font-size: 15px;
+                margin-bottom: 22px;
+            }
+            .message-card {
+                padding: 14px;
+            }
+            .metric-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .metric-card {
+                padding: 12px 10px;
+            }
+            .metric-number {
+                font-size: 30px;
+            }
+            .metric-label {
+                font-size: 11px;
+            }
+            .theme-row {
+                grid-template-columns: 1fr 58px;
+                padding: 10px 12px;
+                gap: 10px;
+            }
+            .theme-row strong {
+                font-size: 14px;
+            }
+            .theme-count {
+                font-size: 20px;
+            }
+            .goal-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .goal-card {
+                padding: 14px 12px;
+            }
+            .goal-card i {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+            .goal-card h3 {
+                font-size: 16px;
+            }
+            .question-list {
+                gap: 9px;
+            }
+            .question-list li {
+                font-size: 15px;
+                padding: 11px 12px;
+                border-left-width: 6px;
+            }
+            .soft-note {
+                font-size: 12px;
+            }
             .list-style li {
                 font-size: 14px;
                 margin-bottom: 8px;
@@ -668,19 +853,19 @@
         <div class="slide dark active" id="slide-1">
             <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag">第1回 異業種交流会 × 企画ミーティング</div>
+                    <div class="category-tag">6/1 異業種交流会 × 企画ミーティング</div>
                 </div>
             </div>
             <div class="slide-content" style="justify-content: center; align-items: flex-start;">
-                <h1 style="font-size: 52px; font-weight: 900; margin: 0 0 15px 0; line-height: 1.25;">
-                    7月「大相談会」に向けた<br>プロデュース作戦会議
+                <h1 class="hero-title">
+                    地域の中小企業で、<br>何ができるかを見つける90分
                 </h1>
-                <p class="subtitle" style="font-size: 24px; margin-bottom: 40px; font-weight: 500;">
-                    〜 地域ビジネスの種を全員で育てる3ステップ 〜
+                <p class="hero-subtitle">
+                    困りごと・強み・連携の種を見つける場
                 </p>
-                <div style="font-size: 14px; color: #94A3B8; border-top: 1px solid var(--primary-light); padding-top: 20px; width: 350px;">
-                    <p style="margin: 0 0 5px 0;">主催：経営革新ワーキンググループ</p>
-                    <p style="margin: 0;">2026年6月1日 開催</p>
+                <div style="font-size: 16px; color: #94A3B8; border-top: 1px solid var(--primary-light); padding-top: 20px; max-width: 760px; line-height: 1.8;">
+                    6月1日は、7月のイベントを一方的に決める会ではありません。<br>
+                    地域の中小企業が「何を相談したいのか」「誰と何ができそうか」を見つける時間です。
                 </div>
             </div>
             <div class="slide-footer">
@@ -692,28 +877,28 @@
         <div class="slide" id="slide-2">
             <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag">PART 1: 現状分析</div>
-                    <h2 class="slide-title">申込者データ：高い期待度と明確なテーマ関心</h2>
+                    <div class="category-tag">TODAY'S PURPOSE</div>
+                    <h2 class="slide-title">今日の目的</h2>
                 </div>
-                <div class="slide-meta">DATA SUMMARY</div>
+                <div class="slide-meta">PURPOSE</div>
             </div>
             <div class="slide-content">
                 <div class="grid-2">
-                    <div class="stat-container">
-                        <p style="font-size: 18px; font-weight: 700; color: var(--text-muted); margin: 0;">本交流会への期待度平均</p>
-                        <div class="stat-value">5.63<span class="stat-unit">/7</span></div>
-                        <p style="font-size: 15px; font-weight: 700; color: var(--accent-red); margin: 0;">★最高評価「7」が12名(40%)で最多！</p>
+                    <div class="message-card accent">
+                        <h3 style="font-size: 30px; margin: 0 0 14px 0; color: var(--primary); line-height: 1.4;">
+                            名刺交換だけで終わらせない
+                        </h3>
+                        <p style="font-size: 20px; line-height: 1.7; margin: 0; font-weight: 700; color: var(--primary-light);">
+                            困りごと・強み・連携の種を見つけ、会の後に話せる相手をつくる時間です。
+                        </p>
                     </div>
                     <div>
                         <ul class="list-style">
-                            <li><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> <span class="text-bold">経営者・意思決定層が73.3%（22名）</span></li>
-                            <li><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> 「新規事業・コラボ」への関心が全体の8割以上</li>
-                            <li><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> 個人事業主と組織（20人以上）が絶妙に融合</li>
+                            <li><i class="fa-solid fa-comment-dots"></i> 自社の困りごとを言語化する</li>
+                            <li><i class="fa-solid fa-lightbulb"></i> 他社の強みを知る</li>
+                            <li><i class="fa-solid fa-handshake"></i> 一緒にできそうな相手を見つける</li>
+                            <li><i class="fa-solid fa-seedling"></i> 7月「中小企業の日」に向けた企画の素材を集める</li>
                         </ul>
-                        <p style="font-size: 16px; line-height: 1.5; color: var(--text-muted); margin-top: 15px;">
-                            これだけポテンシャルの高いメンバーだからこそ、<br>
-                            <span class="text-bold" style="color: var(--primary);">自己紹介セッションで時間を使うのはもったいない！</span>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -726,32 +911,43 @@
         <div class="slide" id="slide-3">
             <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag line-tag">PART 2: プログラム</div>
-                    <h2 class="slide-title">タイムスケジュール：自己紹介は15分で「デジタルログ化」</h2>
+                    <div class="category-tag">PARTICIPANTS</div>
+                    <h2 class="slide-title">現在の参加者データ</h2>
                 </div>
-                <div class="slide-meta">TIMELINE</div>
+                <div class="slide-meta">NO NAMES</div>
             </div>
             <div class="slide-content">
-                <div class="timeline">
-                    <div class="timeline-item active-green">
-                        <div class="timeline-time" style="color:var(--line-green);"><i class="fa-brands fa-line"></i> 13:00 - 13:15 (15m)</div>
-                        <div class="timeline-title" style="color:var(--line-green); font-weight:800;">① 趣旨説明 ＆ 自己紹介（LINEグループ参加・投稿）</div>
-                        <div class="timeline-badge" style="background:var(--line-green);">15分で完了！</div>
+                <div class="metric-grid">
+                    <div class="metric-card" style="grid-column: span 2; border-top: 5px solid var(--primary);">
+                        <div class="metric-number">30</div>
+                        <div class="metric-label">参加申し込み</div>
                     </div>
-                    <div class="timeline-item active-amber">
-                        <div class="timeline-time" style="color:#B58500;">13:15 - 14:10 (55m)</div>
-                        <div class="timeline-title" style="color:#B58500; font-weight:800;">② 【グループ内】「企画の種」ブレインストーミング</div>
-                        <div class="timeline-badge" style="background:var(--accent); color:var(--primary);">たっぷり55分間！</div>
+                    <div class="metric-card" style="border-top: 5px solid var(--line-green);">
+                        <div class="metric-number">22</div>
+                        <div class="metric-label">中小企業者・経営者</div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">14:10 - 14:30 (20m)</div>
-                        <div class="timeline-title">③ 全体共有・発表 ＆ 7月WGへの誘導</div>
+                    <div class="metric-card" style="border-top: 5px solid var(--accent);">
+                        <div class="metric-number">4</div>
+                        <div class="metric-label">中小企業支援機関</div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">14:30 - 15:00 (30m)</div>
-                        <div class="timeline-title">④ 名刺交換会 ＆ 自由交流会</div>
+                    <div class="metric-card">
+                        <div class="metric-number">4</div>
+                        <div class="metric-label">その他</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">12</div>
+                        <div class="metric-label">一人親方・個人事業主</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">8</div>
+                        <div class="metric-label">20人未満</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">10</div>
+                        <div class="metric-label">20人以上</div>
                     </div>
                 </div>
+                <p class="soft-note" style="margin-top: 18px;">個人名・会社名は出さず、場の全体像だけを共有します。</p>
             </div>
             <div class="slide-footer">
                 <span>第1回 異業種交流会×企画ミーティング</span>
@@ -759,40 +955,30 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-4" style="border: 4px solid var(--line-green);">
-            <div class="slide-header" style="border-bottom-color: rgba(6, 199, 85, 0.2);">
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag line-tag"><i class="fa-brands fa-line"></i> SMART ONBOARDING</div>
-                    <h2 class="slide-title" style="border-left-color: var(--line-green);">LINEグループに一斉参加しましょう！</h2>
+                    <div class="category-tag">TOPICS</div>
+                    <h2 class="slide-title">関心が集まっているテーマ</h2>
                 </div>
-                <div class="slide-meta" style="color: var(--line-green);">LINE INTEGRATION</div>
+                <div class="slide-meta">INTERESTS</div>
             </div>
             <div class="slide-content">
                 <div class="grid-2">
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <p class="text-bold" style="font-size: 16px; line-height: 1.4; margin: 0;">
-                            下記をタップしてコピーし、LINEグループに参加したらそのままペーストして送信してください！
-                        </p>
-                        <div class="copy-card" onclick="copyTemplateText()">
-                            <pre class="copy-template" id="templateText">【お名前】[お名前を入力]
-【強み】[自社の技術、個人デザイン、融資相談など]
-【お困りごと】[地域連携サービスをやりたいが右腕がいない、など]
-【出会いたい人】[〇〇な異業種、専門知識のある支援機関]</pre>
-                        </div>
-                        <p style="font-size: 12px; color: var(--accent-red); margin-top: 5px; font-weight: bold;">
-                            ※LINEを利用されない方には「手書き用自己紹介シート」をご用意しております。お気軽にお声がけください。
-                        </p>
+                    <div class="theme-list">
+                        <div class="theme-row"><strong>新規事業・コラボレーション</strong><span class="theme-count">25件</span></div>
+                        <div class="theme-row"><strong>地域経済の活性化</strong><span class="theme-count">22件</span></div>
+                        <div class="theme-row"><strong>人材採用・育成</strong><span class="theme-count">8件</span></div>
+                        <div class="theme-row"><strong>DX推進</strong><span class="theme-count">7件</span></div>
+                        <div class="theme-row"><strong>事業承継・後継者育成</strong><span class="theme-count">5件</span></div>
                     </div>
-                    <div class="line-qr-box">
-                        <div class="qr-image-wrapper">
-                            <img id="lineQrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fline.me%2Fti%2Fg%2FwM7VyzLZc5" alt="LINEグループQRコード">
-                        </div>
-                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: center;">
-                            ※PC・プロジェクター閲覧中の方は、上記QRをスマホカメラでスキャンしてください。
+                    <div class="message-card accent">
+                        <h3 style="font-size: 28px; line-height: 1.45; margin: 0 0 16px 0; color: var(--primary);">
+                            誰と何ができるかを考える場になりそうです
+                        </h3>
+                        <p style="font-size: 18px; line-height: 1.8; margin: 0; color: var(--primary-light); font-weight: 700;">
+                            今回の場は、ただ集まって話すだけではなく、この地域で誰と何ができるかを考える場になりそうです。
                         </p>
-                        <a href="https://line.me/ti/g/wM7VyzLZc5" target="_blank" class="line-direct-btn" id="lineDirectBtn">
-                            <i class="fa-brands fa-line"></i> スマホ：直接LINEで開く
-                        </a>
                     </div>
                 </div>
             </div>
@@ -805,27 +991,32 @@
         <div class="slide" id="slide-5">
             <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag">PART 2: プログラム</div>
-                    <h2 class="slide-title">LINEグループ活用がもたらす「3大メリット」</h2>
+                    <div class="category-tag">GROUND RULES</div>
+                    <h2 class="slide-title">今日のグランドルール</h2>
                 </div>
-                <div class="slide-meta">ADVANTAGES</div>
+                <div class="slide-meta">SAFE TO TALK</div>
             </div>
             <div class="slide-content">
-                <div class="tiled-grid">
+                <div class="metric-grid">
                     <div class="tile-card" style="border-top: 4px solid var(--line-green);">
-                        <i class="fa-solid fa-clock-rotate-left" style="color:var(--line-green);"></i>
-                        <h3>ブレスト時間を極大化</h3>
-                        <p>口頭での自己紹介30分を、スマホ活用によりわずか15分に短縮。55分間のブレストが可能に！</p>
+                        <i class="fa-solid fa-comment-medical" style="color:var(--line-green);"></i>
+                        <h3>売り込みより相談</h3>
+                        <p>うまく話すより、いま困っていることを持ち寄る時間にします。</p>
                     </div>
                     <div class="tile-card" style="border-top: 4px solid var(--primary);">
-                        <i class="fa-solid fa-database"></i>
-                        <h3>自己紹介のログ化</h3>
-                        <p>全員の強みや困りごとがLINEグループに文章として残るため、会が終わった後でもいつでも見返せます。</p>
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                        <h3>正解より素材</h3>
+                        <p>完成した企画でなくて大丈夫。小さな違和感や思いつきも大切にします。</p>
                     </div>
                     <div class="tile-card" style="border-top: 4px solid var(--accent);">
-                        <i class="fa-solid fa-bullseye" style="color:var(--accent);"></i>
-                        <h3>後半の交流をシャープに</h3>
-                        <p>後半の自由交流（30分）で、LINEの自己紹介ログを頼りに、会いたい人・お困りごとのマッチ候補へ直行できます。</p>
+                        <i class="fa-solid fa-plus" style="color:var(--accent);"></i>
+                        <h3>否定より乗っかり</h3>
+                        <p>「それなら、こうできるかも」と足していく話し方を歓迎します。</p>
+                    </div>
+                    <div class="tile-card" style="border-top: 4px solid var(--accent-red);">
+                        <i class="fa-solid fa-heart" style="color:var(--accent-red);"></i>
+                        <h3>立場より本音</h3>
+                        <p>会社の大きさや肩書きより、実際に感じていることから始めます。</p>
                     </div>
                 </div>
             </div>
@@ -838,27 +1029,64 @@
         <div class="slide" id="slide-6">
             <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag">PART 2: プログラム</div>
-                    <h2 class="slide-title">心理的安全性を生む「3つの約束（グランドルール）」</h2>
+                    <div class="category-tag">TIME TABLE</div>
+                    <h2 class="slide-title">90分の流れ</h2>
                 </div>
-                <div class="slide-meta">GRAND RULES</div>
+                <div class="slide-meta">16:00 - 18:00</div>
             </div>
             <div class="slide-content">
-                <div class="tiled-grid">
-                    <div class="tile-card" style="background: #FFFBEB; border-color: var(--accent);">
-                        <i class="fa-solid fa-users-viewfinder" style="color:var(--accent);"></i>
-                        <h3>立場に関わらずフラット</h3>
-                        <p>経営者、一社員、個人事業主。全員が未来の地域大相談会を仕掛ける「共同プロデューサー」です。</p>
+                <div class="grid-2" style="align-items: flex-start; gap: 24px;">
+                    <div class="timeline">
+                        <div class="timeline-item active-green" style="padding: 10px 16px;">
+                            <div class="timeline-time">16:00 - 16:10</div>
+                            <div class="timeline-title">趣旨説明</div>
+                        </div>
+                        <div class="timeline-item active-green" style="padding: 10px 16px;">
+                            <div class="timeline-time">16:10 - 16:25</div>
+                            <div class="timeline-title">自己紹介・共有メモ</div>
+                        </div>
+                        <div class="timeline-item active-amber" style="padding: 10px 16px;">
+                            <div class="timeline-time">16:25 - 16:50</div>
+                            <div class="timeline-title">ワーク1：困りごとを出す</div>
+                        </div>
+                        <div class="timeline-item active-amber" style="padding: 10px 16px;">
+                            <div class="timeline-time">16:50 - 17:15</div>
+                            <div class="timeline-title">ワーク2：誰と何ができそうか</div>
+                        </div>
+                        <div class="timeline-item" style="padding: 10px 16px;">
+                            <div class="timeline-time">17:15 - 17:25</div>
+                            <div class="timeline-title">全体共有</div>
+                        </div>
+                        <div class="timeline-item" style="padding: 10px 16px;">
+                            <div class="timeline-time">17:25 - 17:30</div>
+                            <div class="timeline-title">7月へのつなぎ</div>
+                        </div>
+                        <div class="timeline-item" style="padding: 10px 16px; border-left-color: var(--primary);">
+                            <div class="timeline-time">17:30 - 18:00</div>
+                            <div class="timeline-title">名刺交換会・自由交流</div>
+                        </div>
                     </div>
-                    <div class="tile-card" style="background: #F0FDF4; border-color: var(--line-green);">
-                        <i class="fa-solid fa-gem" style="color:var(--line-green);"></i>
-                        <h3>「お困りごと」こそ宝物</h3>
-                        <p>自慢話は不要。「これがなくて困っている」というリアルな弱みを見せることが、次のビジネスの種になります。</p>
-                    </div>
-                    <div class="tile-card" style="background: #FEF2F2; border-color: var(--accent-red);">
-                        <i class="fa-solid fa-comments" style="color:var(--accent-red);"></i>
-                        <h3>否定禁止、Yes, And</h3>
-                        <p>「でも無理では」は禁止。「それ面白いね！だったら、さらに〇〇を掛け合わせてみたら？」と乗っかりましょう。</p>
+                    <div class="line-qr-box" style="height: auto; padding: 16px; align-items: stretch;">
+                        <h3 style="font-size: 20px; margin: 0 0 8px 0; color: var(--primary);">自己紹介を短くするための共有メモ</h3>
+                        <p class="soft-note" style="margin-bottom: 10px;">
+                            自己紹介の時間を短くし、会の後でもつながりやすくするために、LINEグループを共有メモとして活用します。LINE参加は任意です。LINEを使わない方には紙の自己紹介シートを用意します。
+                        </p>
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 10px;">
+                            <div class="qr-image-wrapper" style="width: 110px; height: 110px; margin: 0;">
+                                <img id="lineQrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fline.me%2Fti%2Fg%2FwM7VyzLZc5" alt="LINEグループQRコード">
+                            </div>
+                            <a href="https://line.me/ti/g/wM7VyzLZc5" target="_blank" class="line-direct-btn" id="lineDirectBtn" style="font-size: 15px;">
+                                <i class="fa-brands fa-line"></i> LINEで開く
+                            </a>
+                        </div>
+                        <div class="copy-card" onclick="copyTemplateText()" style="padding: 10px 12px;">
+                            <pre class="copy-template" id="templateText" style="font-size: 12px;">【お名前】
+【自社・活動の紹介】
+【得意なこと・強み】
+【今困っていること】
+【今日出会いたい人】
+【一緒にやってみたいこと】</pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -871,30 +1099,18 @@
         <div class="slide" id="slide-7">
             <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag">PART 3: 7月へのロードマップ</div>
-                    <h2 class="slide-title">ロードマップ：6月の種まきから、7月の大相談会での実装へ</h2>
+                    <div class="category-tag">WORK 1</div>
+                    <h2 class="slide-title">ワーク1：困りごとを出す</h2>
                 </div>
-                <div class="slide-meta">ROADMAP</div>
+                <div class="slide-meta">16:25 - 16:50</div>
             </div>
             <div class="slide-content">
-                <div class="roadmap-grid">
-                    <div class="roadmap-card active-navy">
-                        <div class="roadmap-badge">1. 本日（6/1）</div>
-                        <h3>異業種交流会</h3>
-                        <p>・お困りごとのハントと可視化<br>・強みを掛け算したブース・セミナーアイデアのブレスト<br>・LINEグループ結成</p>
-                    </div>
-                    <div class="roadmap-card active-navy" style="box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08);">
-                        <div class="roadmap-badge">2. 7月上旬</div>
-                        <h3>ワーキンググループ</h3>
-                        <p style="font-weight:bold; color:var(--primary); margin-bottom: 4px; font-size:11px;">※ここの設計は各グループで調整して当日の準備をすすめてください</p>
-                        <p>・本日出たアイデアのブラッシュアップと特設ブースへの落とし込み<br>・大相談会での役割分担<br>・お試し実験の計画と準備</p>
-                    </div>
-                    <div class="roadmap-card active-green">
-                        <div class="roadmap-badge">3. 7月後半・本番</div>
-                        <h3>お困りごと大相談会</h3>
-                        <p>・自分たちが共同プロデュースした特設ブース・相談ブースの公開展開<br>・リアルなお困りごとの解決<br>・協業・マッチング契約の成立</p>
-                    </div>
-                </div>
+                <ul class="question-list">
+                    <li>自社で今、困っていることは何か</li>
+                    <li>地域で足りないと思うことは何か</li>
+                    <li>一社だけでは進みにくいことは何か</li>
+                    <li>誰かと組めば進みそうなことは何か</li>
+                </ul>
             </div>
             <div class="slide-footer">
                 <span>第1回 異業種交流会×企画ミーティング</span>
@@ -905,34 +1121,18 @@
         <div class="slide" id="slide-8">
             <div class="slide-header">
                 <div class="header-left">
-                    <div class="category-tag">PART 3: 7月へのロードマップ</div>
-                    <h2 class="slide-title">自己紹介シート（お困りごとの収集目的）</h2>
+                    <div class="category-tag">WORK 2</div>
+                    <h2 class="slide-title">ワーク2：誰と何ができそうか</h2>
                 </div>
-                <div class="slide-meta">WORKSHEET PURPOSE</div>
+                <div class="slide-meta">16:50 - 17:15</div>
             </div>
             <div class="slide-content">
-                <table class="matrix-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 35%;">お聞きした項目</th>
-                            <th>大相談会に向けた、運営プロデュース側の活用目的</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-bold">① 自社の紹介・強み</td>
-                            <td>大相談会ブースでの解決策パッケージ（リソース）としてストック</td>
-                        </tr>
-                        <tr>
-                            <td class="text-bold" style="color: var(--accent-red);">② リアルなお困りごと</td>
-                            <td>大相談会当日のリアルな来場者ニーズを代弁する「キラーコンテンツブース」に設計</td>
-                        </tr>
-                        <tr>
-                            <td class="text-bold">③ 今日出会いたい人</td>
-                            <td>本日後半の30分のフリートークマッチングを効率化させる目印に</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <ul class="question-list">
+                    <li>自社の強みは何か</li>
+                    <li>相手の強みと掛け合わせると何ができそうか</li>
+                    <li>7月に小さく試せそうなことは何か</li>
+                    <li>相談会・展示・体験・ミニセミナーにできそうなものは何か</li>
+                </ul>
             </div>
             <div class="slide-footer">
                 <span>第1回 異業種交流会×企画ミーティング</span>
@@ -941,13 +1141,13 @@
         </div>
 
         <div class="slide dark" id="slide-9" style="justify-content: center; align-items: center; text-align: center;">
-            <i class="fa-solid fa-quote-left" style="font-size: 48px; color: var(--accent); margin-bottom: 20px;"></i>
-            <blockquote style="margin: 0; padding: 0; border: none; font-size: 28px; font-weight: 700; line-height: 1.6; max-width: 850px;">
-                私たちが抱える「お困りごと」こそが、<br>
-                7月の大相談会を最も活性化させるコアコンテンツになる。
-            </blockquote>
-            <p style="color: #94A3B8; font-size: 16px; margin-top: 25px; font-weight: 400;">
-                ただの参加者ではなく、仕掛けるプロデューサーとして、地域に共創の種をまきましょう。
+            <div class="category-tag">NEXT STEP</div>
+            <h2 style="font-size: 42px; line-height: 1.35; margin: 0 0 22px 0;">7月「中小企業の日」へのつなぎ</h2>
+            <p style="color: #E2E8F0; font-size: 24px; line-height: 1.7; margin: 0; max-width: 900px; font-weight: 700;">
+                7月の「中小企業の日」に向けて、地域の中小企業が相談できる場、つながれる場、何かを一緒に始められる場を検討しています。
+            </p>
+            <p style="color: #94A3B8; font-size: 18px; line-height: 1.8; margin-top: 24px; max-width: 820px;">
+                今日出た困りごとやアイデアをもとに、実際に意味のある場へ育てていきます。
             </p>
             <div class="slide-footer" style="width: 100%; padding-top: 15px;">
                 <span>第1回 異業種交流会×企画ミーティング</span>
@@ -956,14 +1156,25 @@
         </div>
 
         <div class="slide" id="slide-10" style="justify-content: center; align-items: center; text-align: center; background-color: var(--bg-light);">
-            <h1 style="font-size: 56px; font-weight: 800; color: var(--primary); margin: 0 0 15px 0; letter-spacing: -0.02em;">
-                Thank You!
-            </h1>
-            <div style="width: 50px; height: 3px; background: var(--accent); margin-bottom: 20px;"></div>
-            <p style="font-size: 18px; margin: 0 0 35px 0; font-weight: 500; color: var(--primary-light);">
-                7月のワーキンググループ（WG）、そしてお困りごと大相談会でお会いしましょう！
+            <div class="category-tag">TODAY'S GOAL</div>
+            <h2 style="font-size: 38px; line-height: 1.35; color: var(--primary); margin: 0 0 28px 0;">今日のゴール</h2>
+            <div class="goal-grid">
+                <div class="goal-card">
+                    <i class="fa-solid fa-user-group"></i>
+                    <h3>相談できそうな相手を<br>1人見つける</h3>
+                </div>
+                <div class="goal-card">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <h3>持ち帰れる気づきを<br>1つ得る</h3>
+                </div>
+                <div class="goal-card">
+                    <i class="fa-solid fa-door-open"></i>
+                    <h3>7月に関わる入口を<br>見つける</h3>
+                </div>
+            </div>
+            <p style="font-size: 20px; margin: 28px 0 0 0; font-weight: 800; color: var(--primary-light); line-height: 1.7;">
+                完成形を押しつけるのではなく、地域の声から次の場をつくる。
             </p>
-
             <div class="slide-footer" style="width: 100%; padding-top: 20px;">
                 <span>第1回 異業種交流会×企画ミーティング</span>
                 <span>10</span>
