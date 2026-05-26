@@ -525,6 +525,120 @@
             color: var(--text-muted);
             line-height: 1.4;
         }
+        .participant-overview {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 24px;
+            width: 100%;
+            align-items: stretch;
+        }
+        .participant-main {
+            background: var(--primary);
+            color: #FFFFFF;
+            border-radius: 14px;
+            padding: 30px 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 360px;
+            box-shadow: 0 12px 24px -18px rgba(15, 23, 42, 0.6);
+        }
+        .participant-main-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 96px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .participant-main-label {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.45;
+        }
+        .participant-main-note {
+            color: #CBD5E1;
+            font-size: 15px;
+            line-height: 1.7;
+            border-top: 1px solid rgba(226, 232, 240, 0.22);
+            margin-top: 22px;
+            padding-top: 18px;
+        }
+        .participant-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .participant-block {
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 10px 18px -18px rgba(15, 23, 42, 0.35);
+        }
+        .participant-block h3 {
+            font-size: 19px;
+            margin: 0 0 14px 0;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .participant-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            padding: 11px 0;
+            border-top: 1px solid var(--border);
+        }
+        .participant-row:first-of-type {
+            border-top: 0;
+            padding-top: 0;
+        }
+        .participant-name {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--primary-light);
+            line-height: 1.45;
+        }
+        .participant-count {
+            font-family: 'Poppins', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--line-green);
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .participant-bar {
+            grid-column: 1 / -1;
+            height: 8px;
+            background: #E2E8F0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .participant-bar span {
+            display: block;
+            height: 100%;
+            border-radius: 999px;
+            background: var(--line-green);
+        }
+        .participant-block.scale .participant-count {
+            color: var(--accent);
+        }
+        .participant-block.scale .participant-bar span {
+            background: var(--accent);
+        }
+        .participant-subnote {
+            grid-column: 1 / -1;
+            background: #F8FAFC;
+            border: 1px dashed #CBD5E1;
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 700;
+        }
         .theme-list {
             display: grid;
             grid-template-columns: 1fr;
@@ -781,6 +895,57 @@
             .metric-label {
                 font-size: 11px;
             }
+            .participant-overview {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .participant-main {
+                min-height: auto;
+                padding: 16px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 16px;
+            }
+            .participant-main-number {
+                font-size: 52px;
+                margin-bottom: 0;
+            }
+            .participant-main-label {
+                font-size: 16px;
+            }
+            .participant-main-note {
+                display: none;
+            }
+            .participant-breakdown {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .participant-block {
+                padding: 12px;
+                border-radius: 10px;
+            }
+            .participant-block h3 {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            .participant-row {
+                padding: 8px 0;
+                gap: 8px;
+            }
+            .participant-name {
+                font-size: 13px;
+            }
+            .participant-count {
+                font-size: 22px;
+            }
+            .participant-bar {
+                height: 6px;
+            }
+            .participant-subnote {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
             .theme-row {
                 grid-template-columns: 1fr 58px;
                 padding: 10px 12px;
@@ -989,37 +1154,58 @@
                 <div class="slide-meta">NO NAMES</div>
             </div>
             <div class="slide-content">
-                <div class="metric-grid">
-                    <div class="metric-card" style="grid-column: span 2; border-top: 5px solid var(--primary);">
-                        <div class="metric-number">30</div>
-                        <div class="metric-label">参加申し込み</div>
+                <div class="participant-overview">
+                    <div class="participant-main">
+                        <div class="participant-main-number">30</div>
+                        <div>
+                            <div class="participant-main-label">参加申し込み</div>
+                            <div class="participant-main-note">
+                                経営者、個人事業主、支援機関など、立場の違う人が同じテーブルで話せる場です。
+                            </div>
+                        </div>
                     </div>
-                    <div class="metric-card" style="border-top: 5px solid var(--line-green);">
-                        <div class="metric-number">22</div>
-                        <div class="metric-label">中小企業者・経営者</div>
-                    </div>
-                    <div class="metric-card" style="border-top: 5px solid var(--accent);">
-                        <div class="metric-number">4</div>
-                        <div class="metric-label">中小企業支援機関</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-number">4</div>
-                        <div class="metric-label">その他</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-number">12</div>
-                        <div class="metric-label">一人親方・個人事業主</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-number">8</div>
-                        <div class="metric-label">20人未満</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-number">10</div>
-                        <div class="metric-label">20人以上</div>
+                    <div class="participant-breakdown">
+                        <div class="participant-block">
+                            <h3><i class="fa-solid fa-user-tie"></i> 参加者の立場</h3>
+                            <div class="participant-row">
+                                <div class="participant-name">中小企業者・経営者</div>
+                                <div class="participant-count">22名</div>
+                                <div class="participant-bar"><span style="width: 73%;"></span></div>
+                            </div>
+                            <div class="participant-row">
+                                <div class="participant-name">中小企業支援機関</div>
+                                <div class="participant-count">4名</div>
+                                <div class="participant-bar"><span style="width: 13%;"></span></div>
+                            </div>
+                            <div class="participant-row">
+                                <div class="participant-name">その他</div>
+                                <div class="participant-count">4名</div>
+                                <div class="participant-bar"><span style="width: 13%;"></span></div>
+                            </div>
+                        </div>
+                        <div class="participant-block scale">
+                            <h3><i class="fa-solid fa-building-user"></i> 事業規模</h3>
+                            <div class="participant-row">
+                                <div class="participant-name">一人親方・個人事業主</div>
+                                <div class="participant-count">12名</div>
+                                <div class="participant-bar"><span style="width: 40%;"></span></div>
+                            </div>
+                            <div class="participant-row">
+                                <div class="participant-name">20人未満</div>
+                                <div class="participant-count">8名</div>
+                                <div class="participant-bar"><span style="width: 27%;"></span></div>
+                            </div>
+                            <div class="participant-row">
+                                <div class="participant-name">20人以上</div>
+                                <div class="participant-count">10名</div>
+                                <div class="participant-bar"><span style="width: 33%;"></span></div>
+                            </div>
+                        </div>
+                        <div class="participant-subnote">
+                            個人名・会社名は出さず、場の全体像だけを共有します。
+                        </div>
                     </div>
                 </div>
-                <p class="soft-note" style="margin-top: 18px;">個人名・会社名は出さず、場の全体像だけを共有します。</p>
             </div>
             <div class="slide-footer">
                 <span>第1回 異業種交流会×企画ミーティング</span>
