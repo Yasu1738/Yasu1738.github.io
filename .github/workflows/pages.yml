@@ -28,7 +28,7 @@ jobs:
       - name: Prepare static files
         run: |
           mkdir _site
-          cp -R index.html meeting-slides-20260526 .nojekyll _site/
+          cp -R index.html meeting-slides-20260526 yorozuya-cafe-20260727 .nojekyll _site/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
