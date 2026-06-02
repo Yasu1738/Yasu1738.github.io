@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>稲沢よろずやCafe マッチング診断</title>
+  <style>
+    :root {
+      --ink: #17231f;
+      --muted: #61706a;
+      --line: #d9e2dd;
+      --paper: #fbfcfb;
+      --soft: #eef5f1;
+      --green: #1f6b5a;
+      --green-dark: #14352d;
+      --coral: #e85937;
+      --yellow: #f4b63f;
+      --blue: #4367d8;
+      --shadow: 0 16px 40px rgba(23, 35, 31, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, #eaf2ee 0%, #f7f9f6 42%, #ffffff 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app-shell {
+      width: min(100%, 560px);
+      min-height: 100svh;
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 0 0 1px rgba(23, 35, 31, 0.05);
+      overflow: hidden;
+    }
+
+    .event-band {
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(20, 53, 45, 0.98), rgba(31, 107, 90, 0.94)),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 28px);
+      padding: 18px 18px 16px;
+    }
+
+    .event-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .event-chip,
+    .date-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 29px;
+      line-height: 1.15;
+      font-weight: 850;
+    }
+
+    .brand-title span {
+      display: block;
+      color: #ffe2b0;
+      font-size: 19px;
+      margin-top: 4px;
+    }
+
+    .brand-copy {
+      margin: 12px 0 0;
+      max-width: 31em;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .signal-strip {
+      display: grid;
+      grid-template-columns: 1fr 26px 1fr 26px 1fr;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      color: #f9fffb;
+    }
+
+    .signal-item {
+      min-height: 58px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: var(--radius);
+      padding: 9px 8px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .signal-label {
+      display: block;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .signal-main {
+      display: block;
+      margin-top: 4px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .signal-arrow {
+      text-align: center;
+      color: #ffe2b0;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    main {
+      padding: 18px;
+    }
+
+    .progress-area {
+      margin: 2px 0 18px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .progress-track {
+      height: 9px;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e2e9e5;
+    }
+
+    .progress-bar {
+      width: 20%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--coral), var(--yellow));
+      transition: width 180ms ease;
+    }
+
+    .question-kicker {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .question-title {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.35;
+      font-weight: 850;
+    }
+
+    .question-lead {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .option-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      width: 100%;
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 11px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 13px 13px;
+      color: var(--ink);
+      background: #fff;
+      text-align: left;
+      box-shadow: 0 1px 0 rgba(23, 35, 31, 0.04);
+      cursor: pointer;
+      transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+    }
+
+    .option-button:active {
+      transform: scale(0.99);
+    }
+
+    .option-button[aria-checked="true"] {
+      border-color: var(--coral);
+      background: #fff4f0;
+      box-shadow: 0 0 0 2px rgba(232, 89, 55, 0.12);
+    }
+
+    .option-mark {
+      width: 26px;
+      height: 26px;
+      border: 2px solid #c7d2cd;
+      border-radius: 50%;
+      background: #fff;
+      position: relative;
+    }
+
+    .option-button[aria-checked="true"] .option-mark {
+      border-color: var(--coral);
+      background: var(--coral);
+    }
+
+    .option-button[aria-checked="true"] .option-mark::after {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .option-label {
+      display: block;
+      font-size: 16px;
+      font-weight: 820;
+      line-height: 1.35;
+    }
+
+    .option-note {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .control-button {
+      min-height: 52px;
+      border: 0;
+      border-radius: var(--radius);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .control-button.secondary {
+      color: var(--green-dark);
+      background: #e4eee9;
+    }
+
+    .control-button.primary {
+      color: #fff;
+      background: var(--green-dark);
+      box-shadow: var(--shadow);
+    }
+
+    .control-button:disabled {
+      color: #91a09a;
+      background: #e6ece9;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .result-view {
+      display: none;
+    }
+
+    .result-hero {
+      padding: 18px;
+      color: #fff;
+      background: var(--green-dark);
+      border-radius: var(--radius);
+    }
+
+    .result-label {
+      margin: 0 0 8px;
+      color: #ffe2b0;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .result-title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+
+    .result-copy {
+      margin: 11px 0 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .result-section {
+      margin-top: 16px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .result-card {
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--green);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: #fff;
+    }
+
+    .result-card + .result-card {
+      margin-top: 10px;
+    }
+
+    .result-card.accent {
+      border-left-color: var(--coral);
+    }
+
+    .result-card.blue {
+      border-left-color: var(--blue);
+    }
+
+    .result-card.yellow {
+      border-left-color: var(--yellow);
+    }
+
+    .card-heading {
+      margin: 0 0 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .card-main {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 750;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--green-dark);
+      background: var(--soft);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .match-board {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+    }
+
+    .match-row {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .match-role {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .match-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 760;
+    }
+
+    .share-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .toast {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (min-width: 720px) {
+      body {
+        padding: 28px 0;
+      }
+
+      .app-shell {
+        min-height: auto;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .event-band {
+        padding: 26px 28px 24px;
+      }
+
+      main {
+        padding: 24px 28px 28px;
+      }
+
+      .brand-title {
+        font-size: 34px;
+      }
+
+      .question-title {
+        font-size: 25px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      body {
+        background: var(--paper);
+      }
+
+      .app-shell {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+      }
+
+      .event-band {
+        padding: 15px 14px 14px;
+      }
+
+      .event-row {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      main {
+        padding: 15px 14px 18px;
+      }
+
+      .brand-title {
+        font-size: 25px;
+      }
+
+      .brand-title span {
+        font-size: 17px;
+      }
+
+      .brand-copy {
+        font-size: 13px;
+      }
+
+      .signal-strip {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .signal-arrow {
+        display: none;
+      }
+
+      .signal-item {
+        min-height: 48px;
+      }
+
+      .question-title {
+        font-size: 21px;
+      }
+
+      .option-button {
+        min-height: 76px;
+      }
+
+      .controls,
+      .share-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="event-band">
+      <div class="event-row">
+        <span class="event-chip">稲沢よろずやCafe</span>
+        <span class="date-chip">7月27日</span>
+      </div>
+      <h1 class="brand-title">
+        マッチング診断
+        <span>ちょっと困ったを、誰かの得意へ。</span>
+      </h1>
+      <p class="brand-copy">
+        5つの問いから、今の困りごとのタイプと、当日つながると面白い相手を見つけます。
+      </p>
+      <div class="signal-strip" aria-hidden="true">
+        <div class="signal-item">
+          <span class="signal-label">STEP 1</span>
+          <span class="signal-main">困りごと</span>
+        </div>
+        <div class="signal-arrow">→</div>
+        <div class="signal-item">
+          <span class="signal-label">STEP 2</span>
+          <span class="signal-main">得意な人</span>
+        </div>
+        <div class="signal-arrow">→</div>
+        <div class="signal-item">
+          <span class="signal-label">STEP 3</span>
+          <span class="signal-main">話す問い</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="diagnosisView">
+        <div class="progress-area" aria-live="polite">
+          <div class="progress-label">
+            <span id="stepText">質問 1 / 5</span>
+            <span id="typeHint">30秒診断</span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <p class="question-kicker" id="questionKicker">Q1</p>
+        <h2 class="question-title" id="questionTitle"></h2>
+        <p class="question-lead" id="questionLead"></p>
+        <div class="option-list" id="optionList" role="radiogroup" aria-label="診断の選択肢"></div>
+
+        <div class="controls">
+          <button class="control-button secondary" type="button" id="backButton">戻る</button>
+          <button class="control-button primary" type="button" id="nextButton" disabled>次へ</button>
+        </div>
+      </section>
+
+      <section class="result-view" id="resultView" aria-live="polite">
+        <div class="result-hero">
+          <p class="result-label">あなたのタイプ</p>
+          <h2 class="result-title" id="resultTitle"></h2>
+          <p class="result-copy" id="resultCopy"></p>
+        </div>
+
+        <div class="result-section">
+          <h3 class="section-title">つながるとよい相手</h3>
+          <div class="result-card">
+            <p class="card-heading">おすすめ</p>
+            <div class="tag-list" id="connectList"></div>
+          </div>
+        </div>
+
+        <div class="result-section">
+          <h3 class="section-title">よろずやCafeで話すテーマ</h3>
+          <div class="result-card accent">
+            <p class="card-heading">問い</p>
+            <p class="card-main" id="talkQuestion"></p>
+          </div>
+          <div class="result-card yellow">
+            <p class="card-heading">最初の一歩</p>
+            <p class="card-main" id="firstStep"></p>
+          </div>
+        </div>
+
+        <div class="result-section">
+          <h3 class="section-title">他業種と組めそうな切り口</h3>
+          <div class="match-board" id="matchBoard"></div>
+        </div>
+
+        <div class="share-actions">
+          <button class="control-button secondary" type="button" id="restartButton">もう一度診断</button>
+          <button class="control-button primary" type="button" id="copyButton">結果をコピー</button>
+        </div>
+        <p class="toast" id="toast" aria-live="polite"></p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const TYPE_KEYS = ["labor", "outreach", "venture", "local", "organize"];
+
+    const questions = [
+      {
+        title: "今いちばん気になっていることは？",
+        lead: "正解はありません。今、頭の中でいちばん場所を取っているものを選んでください。",
+        options: [
+          { label: "人手不足", note: "現場が回らない、任せ先が足りない", scores: { labor: 4, organize: 1 } },
+          { label: "売上・集客", note: "お客さんとの接点や発信を増やしたい", scores: { outreach: 4, local: 1 } },
+          { label: "後継者・事業承継", note: "次の世代や役割分担を考えたい", scores: { organize: 3, local: 2 } },
+          { label: "SNS・発信", note: "伝え方、見せ方、届け方を整えたい", scores: { outreach: 4 } },
+          { label: "地域とのつながり", note: "学校、商店、企業、団体と組みたい", scores: { local: 4, venture: 1 } },
+          { label: "新しい商品・サービス", note: "アイデアを形にするきっかけがほしい", scores: { venture: 4, outreach: 1 } }
+        ]
+      },
+      {
+        title: "今の状態に近いものは？",
+        lead: "困りごとの進み具合を選ぶと、当日話すべき問いが見えやすくなります。",
+        options: [
+          { label: "何に困っているか整理できていない", note: "まず言葉にしたい", scores: { organize: 4 } },
+          { label: "相談相手がいない", note: "壁打ちできる人がほしい", scores: { local: 3, organize: 2 } },
+          { label: "アイデアはあるが形になっていない", note: "試作品や企画書にしたい", scores: { venture: 4 } },
+          { label: "一緒に動く相手がほしい", note: "協力者や実験先を探したい", scores: { local: 3, venture: 2 } },
+          { label: "すでに動いているが広がらない", note: "見せ方や巻き込み方を変えたい", scores: { outreach: 4, local: 1 } }
+        ]
+      },
+      {
+        title: "あなたの会社や活動にある強みは？",
+        lead: "困りごとだけでなく、誰かにとっての得意も一緒に見つけます。",
+        options: [
+          { label: "技術・現場力", note: "作る、直す、段取りする力がある", scores: { labor: 2, venture: 2 } },
+          { label: "お客さんとの接点", note: "相談される、紹介できる、店頭がある", scores: { outreach: 3, local: 2 } },
+          { label: "場所・設備・余白", note: "空間、道具、人が集まる場がある", scores: { local: 3, venture: 1 } },
+          { label: "発信・企画", note: "伝える、見せる、イベントにするのが得意", scores: { outreach: 4 } },
+          { label: "人脈・地域情報", note: "誰に聞けばよいかを知っている", scores: { local: 4, organize: 1 } }
+        ]
+      },
+      {
+        title: "当日、話してみたい相手は？",
+        lead: "名刺交換で終わらせず、最初の会話が始まりやすい相手を選びます。",
+        options: [
+          { label: "人を探している会社", note: "採用、外注、手伝い合いを相談したい", scores: { labor: 4 } },
+          { label: "お客さんを持っている人", note: "販路、紹介、共同告知を考えたい", scores: { outreach: 3, local: 1 } },
+          { label: "企画を形にできる人", note: "試作品、デザイン、販売導線を作りたい", scores: { venture: 4 } },
+          { label: "地域団体・学校・行政に近い人", note: "地域課題やイベントとつなげたい", scores: { local: 4 } },
+          { label: "まず話を聞いてくれる人", note: "頭の中を整理したい", scores: { organize: 4 } }
+        ]
+      },
+      {
+        title: "7月27日の帰り道、何が決まっていたら嬉しいですか？",
+        lead: "最後に、今日の診断結果を行動につながる形にします。",
+        options: [
+          { label: "相談できる人の名前", note: "次に連絡する相手が決まる", scores: { organize: 2, local: 2 } },
+          { label: "一緒に試せる協力者", note: "小さく実験する仲間が決まる", scores: { local: 2, venture: 3 } },
+          { label: "明日やる一手", note: "迷いが減り、動き出せる", scores: { organize: 4 } },
+          { label: "発信するテーマ", note: "何を伝えるかが決まる", scores: { outreach: 4 } },
+          { label: "企画のたたき台", note: "アイデアが見える形になる", scores: { venture: 4 } }
+        ]
+      }
+    ];
+
+    const resultProfiles = {
+      labor: {
+        title: "人手・現場連携を整えたいタイプ",
+        copy: "今の課題は、気合いで頑張ることではなく、誰に何を頼めるかを整理することです。よろずやCafeでは、作業を分ける視点で話すとつながりが生まれやすくなります。",
+        connects: ["採用・教育に詳しい人", "短時間で手伝える事業者", "工程改善に強い町工場"],
+        question: "どの作業を外に出せば、現場が一番助かるか？",
+        firstStep: "困っている作業を3つ書き出し、そのうち1つだけを人に説明できる形にします。",
+        matches: [
+          ["町工場", "繁忙期だけ助け合える工程や道具を探す"],
+          ["学校・学生", "見学、短期体験、職場紹介の入り口を作る"],
+          ["士業・支援機関", "採用ではなく、仕事の分け方から相談する"]
+        ]
+      },
+      outreach: {
+        title: "発信・集客を整えたいタイプ",
+        copy: "商品や技術が弱いのではなく、誰に何が伝わるかがまだ整っていない状態です。よろずやCafeでは、売り込みよりも相談される入口を作る話が向いています。",
+        connects: ["顧客接点を持っている人", "SNS・デザインが得意な人", "イベントや場づくりが得意な人"],
+        question: "誰のどんな困りごとに、最初の一言で届くか？",
+        firstStep: "サービス名ではなく、相手の困りごとから始まる一文を作ります。",
+        matches: [
+          ["小売・飲食", "店頭や常連客との接点を共同企画に変える"],
+          ["デザイナー", "写真、言葉、チラシを相談される形に直す"],
+          ["地域メディア", "活動紹介ではなく、困りごとの解決例として出す"]
+        ]
+      },
+      venture: {
+        title: "新しい企画を形にしたいタイプ",
+        copy: "頭の中には種があります。必要なのは、大きな計画よりも小さく試せる形です。よろずやCafeでは、試作品、実験先、最初のお客さんを探す会話が向いています。",
+        connects: ["試作品を一緒に作れる人", "最初に試してくれる人", "販売や発信に強い人"],
+        question: "このアイデアは、誰の困りごとを少し軽くできるか？",
+        firstStep: "完成版ではなく、1週間で試せる小さな形に落とします。",
+        matches: [
+          ["製造業", "試作品、加工、現場目線の改善を組み合わせる"],
+          ["サービス業", "体験メニューや予約導線に変える"],
+          ["商工会・支援機関", "補助金より先に、実験の相手を見つける"]
+        ]
+      },
+      local: {
+        title: "地域連携を広げたいタイプ",
+        copy: "自社だけで完結させるより、地域の人、場所、困りごとをつなげることで価値が出るタイプです。よろずやCafeでは、誰と組むと場が動くかを話すと良さが出ます。",
+        connects: ["学校・地域団体に近い人", "場所を持っている人", "異業種の紹介ができる人"],
+        question: "自社の得意は、地域のどの困りごとに使えるか？",
+        firstStep: "つながりたい相手ではなく、一緒に解きたい地域課題を1つ選びます。",
+        matches: [
+          ["学校", "職業体験、探究学習、企業見学につなげる"],
+          ["商店・飲食", "イベント、商品、相談会を一緒に作る"],
+          ["行政・団体", "地域課題を小さな実験テーマにする"]
+        ]
+      },
+      organize: {
+        title: "まず頭の中を整理したいタイプ",
+        copy: "まだ答えを出す段階ではなく、問いを整える段階です。よろずやCafeでは、解決策を急がず、何に困っているのかを一緒に言葉にする相手が合います。",
+        connects: ["壁打ちが得意な経営者", "支援機関・士業", "同じ悩みを持つ参加者"],
+        question: "今のモヤモヤは、売上、人、時間、関係性のどれに近いか？",
+        firstStep: "困りごとを1つに決めず、まず3つの言葉でメモして持っていきます。",
+        matches: [
+          ["経営者仲間", "同じ悩みを話し、打ち手の前に状況を比べる"],
+          ["士業・専門家", "制度や手続きより前に、論点整理を頼む"],
+          ["地域の先輩", "経験談から、自分の状況に近い型を探す"]
+        ]
+      }
+    };
+
+    let currentStep = 0;
+    let answers = Array(questions.length).fill(null);
+    let latestResultKey = "";
+
+    const diagnosisView = document.getElementById("diagnosisView");
+    const resultView = document.getElementById("resultView");
+    const stepText = document.getElementById("stepText");
+    const progressBar = document.getElementById("progressBar");
+    const questionKicker = document.getElementById("questionKicker");
+    const questionTitle = document.getElementById("questionTitle");
+    const questionLead = document.getElementById("questionLead");
+    const optionList = document.getElementById("optionList");
+    const backButton = document.getElementById("backButton");
+    const nextButton = document.getElementById("nextButton");
+    const restartButton = document.getElementById("restartButton");
+    const copyButton = document.getElementById("copyButton");
+    const toast = document.getElementById("toast");
+
+    function renderQuestion() {
+      const question = questions[currentStep];
+      const selectedIndex = answers[currentStep];
+
+      stepText.textContent = `質問 ${currentStep + 1} / ${questions.length}`;
+      progressBar.style.width = `${((currentStep + 1) / questions.length) * 100}%`;
+      questionKicker.textContent = `Q${currentStep + 1}`;
+      questionTitle.textContent = question.title;
+      questionLead.textContent = question.lead;
+      backButton.disabled = currentStep === 0;
+      nextButton.disabled = selectedIndex === null;
+      nextButton.textContent = currentStep === questions.length - 1 ? "結果を見る" : "次へ";
+
+      optionList.innerHTML = "";
+      question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.setAttribute("role", "radio");
+        button.setAttribute("aria-checked", String(index === selectedIndex));
+        button.innerHTML = `
+          <span class="option-mark" aria-hidden="true"></span>
+          <span>
+            <span class="option-label">${option.label}</span>
+            <span class="option-note">${option.note}</span>
+          </span>
+        `;
+        button.addEventListener("click", () => {
+          answers[currentStep] = index;
+          renderQuestion();
+        });
+        optionList.appendChild(button);
+      });
+    }
+
+    function calculateResultKey() {
+      const score = TYPE_KEYS.reduce((acc, key) => {
+        acc[key] = 0;
+        return acc;
+      }, {});
+
+      answers.forEach((optionIndex, questionIndex) => {
+        if (optionIndex === null) return;
+        const option = questions[questionIndex].options[optionIndex];
+        Object.entries(option.scores).forEach(([key, value]) => {
+          score[key] += value;
+        });
+      });
+
+      return TYPE_KEYS.reduce((bestKey, key) => {
+        return score[key] > score[bestKey] ? key : bestKey;
+      }, TYPE_KEYS[0]);
+    }
+
+    function showResult() {
+      latestResultKey = calculateResultKey();
+      const profile = resultProfiles[latestResultKey];
+
+      document.getElementById("resultTitle").textContent = profile.title;
+      document.getElementById("resultCopy").textContent = profile.copy;
+      document.getElementById("talkQuestion").textContent = profile.question;
+      document.getElementById("firstStep").textContent = profile.firstStep;
+
+      const connectList = document.getElementById("connectList");
+      connectList.innerHTML = "";
+      profile.connects.forEach((text) => {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = text;
+        connectList.appendChild(tag);
+      });
+
+      const matchBoard = document.getElementById("matchBoard");
+      matchBoard.innerHTML = "";
+      profile.matches.forEach(([role, text]) => {
+        const row = document.createElement("div");
+        row.className = "match-row";
+        row.innerHTML = `
+          <div class="match-role">${role}</div>
+          <p class="match-text">${text}</p>
+        `;
+        matchBoard.appendChild(row);
+      });
+
+      diagnosisView.style.display = "none";
+      resultView.style.display = "block";
+      toast.textContent = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function buildShareText() {
+      const profile = resultProfiles[latestResultKey || calculateResultKey()];
+      return [
+        "稲沢よろずやCafe マッチング診断",
+        `タイプ: ${profile.title}`,
+        `つながるとよい相手: ${profile.connects.join(" / ")}`,
+        `話すとよい問い: ${profile.question}`,
+        `最初の一歩: ${profile.firstStep}`
+      ].join("\n");
+    }
+
+    backButton.addEventListener("click", () => {
+      if (currentStep === 0) return;
+      currentStep -= 1;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    nextButton.addEventListener("click", () => {
+      if (answers[currentStep] === null) return;
+      if (currentStep === questions.length - 1) {
+        showResult();
+        return;
+      }
+      currentStep += 1;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    restartButton.addEventListener("click", () => {
+      currentStep = 0;
+      answers = Array(questions.length).fill(null);
+      latestResultKey = "";
+      resultView.style.display = "none";
+      diagnosisView.style.display = "block";
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    copyButton.addEventListener("click", async () => {
+      const text = buildShareText();
+      try {
+        await navigator.clipboard.writeText(text);
+        toast.textContent = "結果をコピーしました。";
+      } catch (error) {
+        toast.textContent = "コピーできない場合は、結果画面の文章を選択して使ってください。";
+      }
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
