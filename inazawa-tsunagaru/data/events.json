@@ -3,8 +3,41 @@
   "source_id": "events",
   "source_label": "稲沢市イベント",
   "source_url": "https://www.city.inazawa.aichi.jp/category/4-7-0-0-0-0-0-0-0-0.html",
-  "content_hash": "bootstrap",
-  "last_changed_at": null,
-  "last_checked_at": null,
-  "items": []
+  "content_hash": "761d3ef417a696d96e46bed7fb4cf714475ef70bb63715d3e80c1121d76a9244",
+  "items": [
+    {
+      "title": "観光・文化",
+      "url": "https://www.city.inazawa.aichi.jp/category/4-0-0-0-0-0-0-0-0-0.html"
+    },
+    {
+      "title": "没後40年特別展 小野竹喬と荻須高徳 ―日本画家と洋画家、風景へのまなざし―",
+      "url": "https://www.city.inazawa.aichi.jp/museum/0000003002.html"
+    },
+    {
+      "title": "祭り・催し",
+      "url": "https://www.city.inazawa.aichi.jp/category/4-7-6-0-0-0-0-0-0-0.html"
+    },
+    {
+      "title": "スポーツ",
+      "url": "https://www.city.inazawa.aichi.jp/category/4-7-1-0-0-0-0-0-0-0.html"
+    },
+    {
+      "title": "コンサート・イベントのご案内",
+      "url": "https://www.city.inazawa.aichi.jp/ica/0000002507.html"
+    },
+    {
+      "title": "教室・講座",
+      "url": "https://www.city.inazawa.aichi.jp/category/4-7-2-0-0-0-0-0-0-0.html"
+    },
+    {
+      "title": "文化・芸術",
+      "url": "https://www.city.inazawa.aichi.jp/category/4-7-8-0-0-0-0-0-0-0.html"
+    },
+    {
+      "title": "国府宮はだか祭",
+      "url": "https://www.city.inazawa.aichi.jp/category/4-7-5-0-0-0-0-0-0-0.html"
+    }
+  ],
+  "last_changed_at": "2026-08-14T10:22:55+00:00",
+  "last_checked_at": "2026-08-14T10:22:55+00:00"
 }
