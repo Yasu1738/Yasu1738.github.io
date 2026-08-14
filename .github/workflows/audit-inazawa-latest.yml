@@ -26,6 +26,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
+      - name: Verify static body with curl
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location \
+            'https://yasu1738.github.io/inazawa-tsunagaru/latest/' \
+            --output live-latest.html
+          grep --fixed-strings '本ページは非公式の情報整理ページです。' live-latest.html
+          grep --fixed-strings '稲沢市公式サイト 最新情報まとめ' live-latest.html
+          grep --fixed-strings '気になる支援制度、まずは相談から' live-latest.html
+          grep --fixed-strings '<script type="application/ld+json">' live-latest.html
+          if grep --fixed-strings '読み込み中' live-latest.html; then
+            echo 'Client-side loading placeholder was found in public HTML.' >&2
+            exit 1
+          fi
+          if grep --fixed-strings 'fetch(' live-latest.html; then
+            echo 'Runtime data fetch was found in public HTML.' >&2
+            exit 1
+          fi
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -67,6 +87,7 @@ jobs:
         with:
           name: inazawa-latest-lighthouse
           path: |
+            live-latest.html
             inazawa-latest-lighthouse.report.json
             inazawa-latest-lighthouse.report.html
             accessibility-score.txt
