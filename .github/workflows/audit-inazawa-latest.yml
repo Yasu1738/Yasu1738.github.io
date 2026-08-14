@@ -1,0 +1,74 @@
+name: Audit Inazawa Latest
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/audit-inazawa-latest.yml'
+  workflow_run:
+    workflows:
+      - Deploy GitHub Pages
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: audit-inazawa-latest
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run mobile Lighthouse accessibility audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes lighthouse@13.4.1 \
+            'https://yasu1738.github.io/inazawa-tsunagaru/latest/' \
+            --only-categories=accessibility \
+            --form-factor=mobile \
+            --screen-emulation.mobile=true \
+            --chrome-flags='--headless --no-sandbox --disable-gpu' \
+            --output=json \
+            --output=html \
+            --output-path='./inazawa-latest-lighthouse' \
+            --quiet
+
+      - name: Enforce Accessibility score of 90 or higher
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('inazawa-latest-lighthouse.report.json', 'utf8'));
+          const score = Math.round(report.categories.accessibility.score * 100);
+          console.log(`Lighthouse mobile Accessibility: ${score}`);
+          fs.writeFileSync('accessibility-score.txt', `${score}\n`);
+          if (score < 90) {
+            console.error(`Accessibility score ${score} is below the required 90.`);
+            process.exit(1);
+          }
+          NODE
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: inazawa-latest-lighthouse
+          path: |
+            inazawa-latest-lighthouse.report.json
+            inazawa-latest-lighthouse.report.html
+            accessibility-score.txt
+          if-no-files-found: warn
+          retention-days: 30
