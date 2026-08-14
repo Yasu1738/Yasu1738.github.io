@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
 
-      # Build the complete static page before committing any generated file.
+      # Build and validate the complete static page before replacing public files.
       - name: Fetch official sources and generate static HTML
         run: python scripts/update_inazawa_data.py
 
