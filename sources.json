@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "timezone": "Asia/Tokyo",
+  "sources": [
+    {
+      "id": "events",
+      "label": "稲沢市イベント",
+      "url": "https://www.city.inazawa.aichi.jp/category/4-7-0-0-0-0-0-0-0-0.html",
+      "output": "inazawa-tsunagaru/data/events.json",
+      "kind": "events"
+    },
+    {
+      "id": "business_support",
+      "label": "稲沢市企業支援",
+      "url": "https://www.city.inazawa.aichi.jp/category/6-2-0-0-0-0-0-0-0-0.html",
+      "output": "inazawa-tsunagaru/data/business-support.json",
+      "kind": "business"
+    }
+  ]
+}
