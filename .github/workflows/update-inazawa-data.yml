@@ -1,0 +1,49 @@
+name: Update Inazawa Hub Data
+
+on:
+  schedule:
+    # 06:00 JST = 21:00 UTC (previous day)
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/update_inazawa_data.py'
+      - 'sources.json'
+      - '.github/workflows/update-inazawa-data.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: inazawa-auto-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Fetch and compare official sources
+        run: python scripts/update_inazawa_data.py
+
+      - name: Commit only when source content changed
+        run: |
+          if git diff --quiet -- inazawa-tsunagaru/data/; then
+            echo "No source changes. Nothing to commit."
+            exit 0
+          fi
+          git config user.name "inazawa-auto-update[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add inazawa-tsunagaru/data/
+          git commit -m "Auto-update Inazawa event and business support data"
+          git push
