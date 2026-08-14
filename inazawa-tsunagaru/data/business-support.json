@@ -1,55 +1,48 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source_id": "business_support",
   "source_label": "稲沢市企業支援",
   "source_url": "https://www.city.inazawa.aichi.jp/category/6-2-0-0-0-0-0-0-0-0.html",
-  "content_hash": "0194e627fa06410ed7c3794816a74c7d39a9c69c867e484d5e918bb01dc7bf8d",
+  "content_hash": "8a231991216d32767e970d2ae647a146b48d708cf659a2ef1cbe2c4e6a85a31b",
   "items": [
     {
-      "title": "産業・仕事",
-      "url": "https://www.city.inazawa.aichi.jp/category/6-0-0-0-0-0-0-0-0-0.html"
-    },
-    {
-      "title": "創業支援",
-      "url": "https://www.city.inazawa.aichi.jp/category/6-2-1-0-0-0-0-0-0-0.html"
-    },
-    {
-      "title": "中小企業振興基本条例",
-      "url": "https://www.city.inazawa.aichi.jp/category/6-2-2-0-0-0-0-0-0-0.html"
-    },
-    {
-      "title": "補助金・奨励金",
-      "url": "https://www.city.inazawa.aichi.jp/category/6-2-3-0-0-0-0-0-0-0.html"
-    },
-    {
-      "title": "融資・助成・相談",
-      "url": "https://www.city.inazawa.aichi.jp/category/6-2-4-0-0-0-0-0-0-0.html"
-    },
-    {
-      "title": "事業所用地等情報ネットワーク事業",
-      "url": "https://www.city.inazawa.aichi.jp/0000000886.html"
-    },
-    {
       "title": "経済産業省「中東情勢関連対策ワンストップポータル」のお知らせ",
-      "url": "https://www.city.inazawa.aichi.jp/0000005792.html"
+      "url": "https://www.city.inazawa.aichi.jp/0000005792.html",
+      "is_new": false,
+      "first_seen_at": null
     },
     {
       "title": "令和8年計量器定期検査のお知らせ",
-      "url": "https://www.city.inazawa.aichi.jp/0000000879.html"
-    },
-    {
-      "title": "中小企業等経営強化法に基づく先端設備等導入計画の認定",
-      "url": "https://www.city.inazawa.aichi.jp/0000000907.html"
+      "url": "https://www.city.inazawa.aichi.jp/0000000879.html",
+      "is_new": false,
+      "first_seen_at": null
     },
     {
       "title": "事業承継",
-      "url": "https://www.city.inazawa.aichi.jp/0000005254.html"
+      "url": "https://www.city.inazawa.aichi.jp/0000005254.html",
+      "is_new": false,
+      "first_seen_at": null
+    },
+    {
+      "title": "事業所用地等情報ネットワーク事業",
+      "url": "https://www.city.inazawa.aichi.jp/0000000886.html",
+      "is_new": false,
+      "first_seen_at": null
+    },
+    {
+      "title": "中小企業等経営強化法に基づく先端設備等導入計画の認定",
+      "url": "https://www.city.inazawa.aichi.jp/0000000907.html",
+      "is_new": false,
+      "first_seen_at": null
     },
     {
       "title": "オンラインによる立地相談",
-      "url": "https://www.city.inazawa.aichi.jp/0000000854.html"
+      "url": "https://www.city.inazawa.aichi.jp/0000000854.html",
+      "is_new": false,
+      "first_seen_at": null
     }
   ],
-  "last_changed_at": "2026-08-14T10:22:55+00:00",
-  "last_checked_at": "2026-08-14T10:22:55+00:00"
+  "new_count": 0,
+  "last_changed_at": "2026-08-14T21:12:16+09:00",
+  "last_checked_at": "2026-08-14T21:12:16+09:00"
 }
