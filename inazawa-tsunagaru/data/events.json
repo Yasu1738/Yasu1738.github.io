@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "source_id": "events",
+  "source_label": "稲沢市イベント",
+  "source_url": "https://www.city.inazawa.aichi.jp/category/4-7-0-0-0-0-0-0-0-0.html",
+  "content_hash": "bootstrap",
+  "last_changed_at": null,
+  "last_checked_at": null,
+  "items": []
+}
