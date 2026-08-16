@@ -29,7 +29,7 @@
       "name": "稲沢市の最新情報まとめ（イベント・経営支援）｜稲沢つながる広場",
       "description": "毎朝6時に稲沢市公式サイトを確認し、イベント・企業支援の新着と更新情報を整理する非公式ページです。最終確認日時、掲載日、公式リンクを明示し、相談窓口へつなぎます。",
       "inLanguage": "ja",
-      "dateModified": "2026-08-16T06:19:38+09:00",
+      "dateModified": "2026-08-16T11:15:27+09:00",
       "isPartOf": {
         "@type": "WebSite",
         "name": "稲沢つながる広場",
@@ -141,6 +141,25 @@ a:focus-visible{outline:3px solid #ffbf47;outline-offset:3px;border-radius:4px}
 .counts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .count{display:inline-flex;min-height:34px;align-items:center;padding:0 11px;border-radius:999px;background:#eaf3ff;color:var(--blue);font-size:12px;font-weight:900;white-space:nowrap}
 .count.new{background:#fff0e5;color:#9a4d12}
+.support-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:16px;padding:22px 26px 26px;background:#fff}
+.support-card{min-width:0;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden}
+.support-card a{display:block;height:100%;text-decoration:none}
+.support-card a:hover{background:#f8fbff}
+.video-thumb{position:relative;aspect-ratio:16/9;background:#dbe9f8;overflow:hidden}
+.video-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.play-mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:rgba(23,61,112,.92);color:#fff;font-size:23px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.support-body{padding:18px}
+.support-body h3{margin:0 0 7px;color:var(--navy);font-size:18px;line-height:1.45}
+.support-body p{margin:0;color:var(--muted);font-size:13px}
+.support-meta{display:block;margin-top:12px;color:var(--blue);font-size:13px;font-weight:900}
+.deadline-card{border-color:#efc7a8;background:#fffaf5}
+.deadline-card a:hover{background:#fff5eb}
+.deadline-card .support-body h3{color:#8d4310}
+.deadline-date{display:block;margin:9px 0 7px;color:var(--red);font-size:24px;font-weight:950;line-height:1.2;font-variant-numeric:tabular-nums}
+.contact-card{border-color:#cfe3ca;background:#fbfff9}
+.contact-card a:hover{background:#f3fbef}
+.contact-card .support-body h3{color:#315f2a}
+.phone-number{display:block;margin:9px 0 7px;color:#315f2a;font-size:22px;font-weight:950;line-height:1.2;font-variant-numeric:tabular-nums}
 .item-list{list-style:none;margin:0;padding:0}
 .item{border-top:1px solid #edf1f5}
 .item:first-child{border-top:0}
@@ -167,8 +186,9 @@ a:focus-visible{outline:3px solid #ffbf47;outline-offset:3px;border-radius:4px}
 .site-footer p{margin:0;color:#dce6f3;font-size:13px}
 .site-footer a{display:inline-flex;align-items:center;min-height:44px;color:#fff;font-weight:850}
 .operator{margin-top:12px;color:#cbd8e8;font-size:12px}
-@media(max-width:720px){.header-inner{min-height:62px}.brand small{display:none}.hero{padding-top:25px}.check-grid{grid-template-columns:1fr}.section-head{display:block;padding:21px 19px 16px}.counts{justify-content:flex-start;margin-top:13px}.item-link{grid-template-columns:64px 1fr;padding:14px 19px;min-height:72px}.item-meta{grid-column:2;justify-content:flex-start}.section-foot{padding:18px 19px 21px}.cta{display:block}.cta a{width:100%;margin-top:14px}.footer-grid{grid-template-columns:1fr}.home-link{padding:0 10px}}
-@media(max-width:420px){.wrap{width:min(100% - 24px,1040px)}.hero h1{font-size:34px}.item-link{grid-template-columns:1fr;gap:4px}.item-meta{grid-column:1}.item-date{font-size:12px}.breadcrumb a{min-height:44px}}
+@media(max-width:880px){.support-grid{grid-template-columns:1fr 1fr}.video-card{grid-column:1/-1}}
+@media(max-width:720px){.header-inner{min-height:62px}.brand small{display:none}.hero{padding-top:25px}.check-grid{grid-template-columns:1fr}.section-head{display:block;padding:21px 19px 16px}.counts{justify-content:flex-start;margin-top:13px}.support-grid{grid-template-columns:1fr;padding:18px 19px 21px}.video-card{grid-column:auto}.item-link{grid-template-columns:64px 1fr;padding:14px 19px;min-height:72px}.item-meta{grid-column:2;justify-content:flex-start}.section-foot{padding:18px 19px 21px}.cta{display:block}.cta a{width:100%;margin-top:14px}.footer-grid{grid-template-columns:1fr}.home-link{padding:0 10px}}
+@media(max-width:420px){.wrap{width:min(100% - 24px,1040px)}.hero h1{font-size:34px}.item-link{grid-template-columns:1fr;gap:4px}.item-meta{grid-column:1}.item-date{font-size:12px}.breadcrumb a{min-height:44px}.deadline-date{font-size:22px}.phone-number{font-size:21px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -194,7 +214,7 @@ a:focus-visible{outline:3px solid #ffbf47;outline-offset:3px;border-radius:4px}
       <p>稲沢つながる広場（運営責任者：西冨 泰典）が独自に整理しており、稲沢市が運営する公式サイト・公式事業ではありません。</p>
     </div>
     <div class="check-grid" aria-label="更新状況">
-      <div class="check-item"><span>最終確認</span><time datetime="2026-08-16T06:19:38+09:00">2026-08-16 06:19 JST</time></div>
+      <div class="check-item"><span>最終確認</span><time datetime="2026-08-16T11:15:27+09:00">2026-08-16 11:15 JST</time></div>
       <div class="check-item"><span>掲載内容の最終更新</span><time datetime="2026-08-14T21:12:16+09:00">2026-08-14</time></div>
     </div>
   </div>
@@ -214,6 +234,47 @@ a:focus-visible{outline:3px solid #ffbf47;outline-offset:3px;border-radius:4px}
           <a href="../consultation/#community">地域の相談入口へ</a>
         </div>
       </footer>
+    </section>
+
+    <section class="section" aria-labelledby="featured-support-heading">
+      <header class="section-head">
+        <div><h2 id="featured-support-heading">いま使える事業者向け情報</h2><p>稲沢市の動画・期限付き支援・相談窓口を、すぐ動ける形で整理</p></div>
+      </header>
+      <div class="support-grid">
+        <article class="support-card video-card">
+          <a href="https://youtu.be/KfUfPpFLASU" target="_blank" rel="noopener noreferrer">
+            <div class="video-thumb">
+              <img src="https://i.ytimg.com/vi/KfUfPpFLASU/hqdefault.jpg" alt="いなざわふれあい通信 令和8年8月後半号の動画サムネイル" loading="lazy">
+              <span class="play-mark" aria-hidden="true">▶</span>
+            </div>
+            <div class="support-body">
+              <h3>小さなお店から大きな工場まで　稲沢市がサポート！</h3>
+              <p>「いなざわふれあい通信」令和8年8月後半号。創業支援、企業の成長、新たな雇用につながる市の取り組みを紹介しています。</p>
+              <span class="support-meta">稲沢市公式動画を見る ↗</span>
+            </div>
+          </a>
+        </article>
+        <article class="support-card deadline-card">
+          <a href="https://www.city.inazawa.aichi.jp/0000005299.html" target="_blank" rel="noopener noreferrer">
+            <div class="support-body">
+              <h3>中小企業設備投資促進補助金</h3>
+              <span class="deadline-date">申請期限 2026年9月30日</span>
+              <p>事業用家屋・償却資産の新規取得を支援。対象要件や必要書類は稲沢市公式ページで確認してください。</p>
+              <span class="support-meta">制度の詳細・申請方法を見る ↗</span>
+            </div>
+          </a>
+        </article>
+        <article class="support-card contact-card">
+          <a href="https://www.city.inazawa.aichi.jp/0000000871.html" target="_blank" rel="noopener noreferrer">
+            <div class="support-body">
+              <h3>スタートアップいなざわ</h3>
+              <span class="phone-number">080-4187-4028</span>
+              <p>創業、新規事業、補助金、融資、事業承継などを無料相談。2026年4月からの新しい電話番号です。</p>
+              <span class="support-meta">相談内容・受付時間を確認する ↗</span>
+            </div>
+          </a>
+        </article>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="business-heading">
