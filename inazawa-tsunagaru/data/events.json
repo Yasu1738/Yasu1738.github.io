@@ -3,17 +3,24 @@
   "source_id": "events",
   "source_label": "稲沢市イベント",
   "source_url": "https://www.city.inazawa.aichi.jp/category/4-7-0-0-0-0-0-0-0-0.html",
-  "content_hash": "6ae54cccb9c62eb261e3b2e49f9a86d9b673355481de8a00760ab0eec507d28a",
+  "content_hash": "c8bf9d0754f568836c743c577d0895610317d31c4919091b32475ce409e040aa",
   "items": [
+    {
+      "title": "D51一般公開",
+      "url": "https://www.city.inazawa.aichi.jp/0000003722.html",
+      "is_new": true,
+      "first_seen_at": "2026-09-08T08:16:47+09:00",
+      "published_date": "2026-09-07"
+    },
     {
       "title": "【アジアパラ競技大会】陸上競技へ市民招待を実施します",
       "url": "https://www.city.inazawa.aichi.jp/0000005892.html",
-      "is_new": true,
+      "is_new": false,
       "first_seen_at": "2026-09-07T07:41:32+09:00",
       "published_date": "2026-08-27"
     }
   ],
   "new_count": 1,
-  "last_changed_at": "2026-09-07T07:41:32+09:00",
-  "last_checked_at": "2026-09-07T07:41:32+09:00"
+  "last_changed_at": "2026-09-08T08:16:47+09:00",
+  "last_checked_at": "2026-09-08T08:16:47+09:00"
 }
