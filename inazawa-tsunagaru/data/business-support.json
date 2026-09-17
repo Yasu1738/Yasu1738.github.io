@@ -3,8 +3,14 @@
   "source_id": "business_support",
   "source_label": "稲沢市企業支援",
   "source_url": "https://www.city.inazawa.aichi.jp/category/6-2-0-0-0-0-0-0-0-0.html",
-  "content_hash": "8a231991216d32767e970d2ae647a146b48d708cf659a2ef1cbe2c4e6a85a31b",
+  "content_hash": "2a46c6239c2768ea935a5b65bfd70b3a25bd15eba6ba02a49f92cd09287bfd98",
   "items": [
+    {
+      "title": "事業承継支援に関する連携協定（稲沢市・稲沢商工会議所・祖父江町商工会・平和町商工会・株式会社日本政策金融公庫一宮支店）",
+      "url": "https://www.city.inazawa.aichi.jp/0000006015.html",
+      "is_new": true,
+      "first_seen_at": "2026-09-18T08:21:56+09:00"
+    },
     {
       "title": "経済産業省「中東情勢関連対策ワンストップポータル」のお知らせ",
       "url": "https://www.city.inazawa.aichi.jp/0000005792.html",
@@ -42,7 +48,7 @@
       "first_seen_at": null
     }
   ],
-  "new_count": 0,
-  "last_changed_at": "2026-08-14T21:12:16+09:00",
-  "last_checked_at": "2026-09-17T08:32:31+09:00"
+  "new_count": 1,
+  "last_changed_at": "2026-09-18T08:21:56+09:00",
+  "last_checked_at": "2026-09-18T08:21:56+09:00"
 }
